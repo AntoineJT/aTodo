@@ -1,16 +1,17 @@
 *.iml
 .gradle/
-/local.properties
-# I don't want to keep anything about .idea folder
-# /.idea/caches
-# /.idea/libraries
-# /.idea/modules.xml
-# /.idea/workspace.xml
-# /.idea/navEditor.xml
-# /.idea/assetWizardSettings.xml
-/.idea/
 .DS_Store
-/build
-/captures
 .externalNativeBuild
 .cxx
+
+# I don't want to keep anything about .idea folder
+# /src/.idea/caches
+# /src/.idea/libraries
+# /src/.idea/modules.xml
+# /src/.idea/workspace.xml
+# /src/.idea/navEditor.xml
+# /src/.idea/assetWizardSettings.xml
+/src/.idea/
+/src/local.properties
+/src/build
+/src/captures
