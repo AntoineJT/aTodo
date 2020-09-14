@@ -1,17 +1,4 @@
-*.iml
-.gradle/
-.DS_Store
-.externalNativeBuild
-.cxx
-
-# I don't want to keep anything about .idea folder
-# /src/.idea/caches
-# /src/.idea/libraries
-# /src/.idea/modules.xml
-# /src/.idea/workspace.xml
-# /src/.idea/navEditor.xml
-# /src/.idea/assetWizardSettings.xml
-/src/.idea/
-/src/local.properties
-/src/build
-/src/captures
+.vs/
+bin/
+obj/
+*.csproj.user
