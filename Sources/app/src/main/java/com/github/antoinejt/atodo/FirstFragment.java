@@ -7,6 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.github.antoinejt.atodo.dataclasses.TaskItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirstFragment extends Fragment {
 
@@ -22,6 +28,11 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        RecyclerView rv = view.findViewById(R.id.task_list);
+        TaskListAdapter adapter = new TaskListAdapter(genDummyTasks(300));
+        rv.setAdapter(adapter);
+        rv.setHasFixedSize(true);
+
         /*
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,5 +42,15 @@ public class FirstFragment extends Fragment {
             }
         });
          */
+    }
+
+    public List<TaskItem> genDummyTasks(int count) {
+        // todo assert count > 0
+        List<TaskItem> result = new ArrayList<>();
+        for (int i = 1; i <= count; ++i) {
+            TaskItem item = new TaskItem("Tâche n°" + i, "Grosse description omg");
+            result.add(item);
+        }
+        return result;
     }
 }
