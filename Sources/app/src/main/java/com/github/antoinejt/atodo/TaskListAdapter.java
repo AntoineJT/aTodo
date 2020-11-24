@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.exassert.Preconditions;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
+        Preconditions.requiresUnsigned(position);
         TaskItem item = taskList.get(position);
 
         holder.getTitle().setText(item.title);
