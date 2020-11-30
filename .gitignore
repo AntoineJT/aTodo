@@ -4,3 +4,5 @@ obj/
 *.csproj.user
 # Word temp file
 ~$*
+# Looping backup file
+*.lo1
