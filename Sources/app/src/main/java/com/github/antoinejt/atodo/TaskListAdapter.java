@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.exassert.Preconditions;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -45,8 +46,13 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     static class TaskViewHolder extends RecyclerView.ViewHolder {
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
-            TextView title = getTitle();
-            TextView shortDescription = getShortDescription();
+
+            itemView.setOnClickListener((View view) -> {
+                Snackbar.make(view, "Clicked on " + getTitle().getText(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            });
+            // TextView title = getTitle();
+            // TextView shortDescription = getShortDescription();
         }
 
         protected TextView getTitle() {
