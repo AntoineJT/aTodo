@@ -42,7 +42,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         return taskList.size();
     }
 
-    class TaskViewHolder extends RecyclerView.ViewHolder {
+    static class TaskViewHolder extends RecyclerView.ViewHolder {
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             TextView title = getTitle();
