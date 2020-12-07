@@ -1,11 +1,14 @@
 package com.github.antoinejt.atodo;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
@@ -50,6 +53,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             itemView.setOnClickListener((View view) -> {
                 Snackbar.make(view, "Clicked on " + getTitle().getText(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                MainActivity.getInstance().changeActivity(TaskActivity.class);
             });
             // TextView title = getTitle();
             // TextView shortDescription = getShortDescription();
