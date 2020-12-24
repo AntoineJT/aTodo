@@ -1,6 +1,5 @@
 package com.github.antoinejt.atodo;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -55,6 +55,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
                         .setAction("Action", null).show();
 
                 MainActivity.getInstance().changeActivity(TaskActivity.class);
+                Goto.changeActivity(MainActivity.getInstance(), TaskActivity.class);
             });
             // TextView title = getTitle();
             // TextView shortDescription = getShortDescription();

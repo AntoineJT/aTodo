@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +20,6 @@ public class MainActivity extends AppCompatActivity {
         return instance;
     }
 
-    public void changeActivity(Class<? extends Activity> clazz) {
-        Intent i = new Intent(this, clazz);
-        startActivity(i);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> changeActivity(TaskActivity.class));
+        fab.setOnClickListener(view -> Goto.changeActivity(this, TaskActivity.class));
     }
 
     @Override
