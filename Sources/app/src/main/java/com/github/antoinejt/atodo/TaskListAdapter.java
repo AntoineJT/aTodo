@@ -6,14 +6,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -51,10 +48,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             super(itemView);
 
             itemView.setOnClickListener((View view) -> {
-                Snackbar.make(view, "Clicked on " + getTitle().getText(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                MainActivity.getInstance().changeActivity(TaskActivity.class);
                 Goto.changeActivity(MainActivity.getInstance(), TaskActivity.class);
             });
             // TextView title = getTitle();
