@@ -3,15 +3,15 @@ package com.github.antoinejt.atodo;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import java.util.ArrayList;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
+import com.github.antoinejt.atodo.dataclasses.TaskItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBUtils extends SQLiteOpenHelper{
-
     public static final String DATABASE_NAME = "Database.db";
 
     public DBUtils(Context context) {
@@ -155,18 +155,20 @@ public class DBUtils extends SQLiteOpenHelper{
         return true;
     }
 
-    public static ArrayList<String> getTasks() {
-        ArrayList<String> array_list = new ArrayList<String>();
-
+    public List<TaskItem> getTasks() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select taskName, taskDescription from Task", null );
         res.moveToFirst();
 
+        List<TaskItem> taskItems = new ArrayList<>();
         while(!res.isAfterLast()){
-            array_list.add(res.getString(res.getColumnIndex("taskName"));
+            String name = res.getString(res.getColumnIndex("taskName"));
+            String description = res.getString(res.getColumnIndex("taskDescription"));
+
+            taskItems.add(new TaskItem(name, description));
             res.moveToNext();
         }
-        return array_list;
+        return taskItems;
     }
 /*
     public ArrayList<String> getTask() {
