@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.Settings;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 
@@ -25,7 +26,8 @@ public class DBUtils extends SQLiteOpenHelper{
                         "taskId integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
                         "taskName text NOT NULL," +
                         "taskDescription text NOT NULL," +
-                        "taskFinished INTEGER NOT NULL DEFAULT 0 CHECK(taskFinished IN (0,1))")
+                        "taskListId text NOT NULL"+
+                        "taskFinished INTEGER NOT NULL DEFAULT 0 CHECK(taskFinished IN (0,1)))")
         );
 
         db.execSQL(
@@ -66,14 +68,24 @@ public class DBUtils extends SQLiteOpenHelper{
         db.insert("TaskList", null, contentValues);
         return true;
     }
+    //TODO Review this insert thing, Task insert broken AF
+    public String idSelect(String name){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "SELECT taskListId FROM Tasklist WHERE taskListName = ?", null );
+        System.err.print(res.toString());
+        return res.toString();
+    }
+
+    public void miniInsert(String taskName, String taskDescription, String taskFinished, String taskListId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        //db.rawQuery("INSERT INTO Task (TaskName, TaskDescription, TaskFinished) VALUES (?, ?, ?) WHERE TaskList.taskListId = ?", null);
+        db.rawQuery("INSERT INTO Task (taskName, taskDescription, taskFinished) VALUES (?, ?, ?, ?)", null);
+    }
 
     public boolean insertTask(String taskName, String taskDescription, String taskFinished) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("taskName", taskName);
-        contentValues.put("taskDescription", taskDescription);
-        contentValues.put("taskFinished", taskFinished);
-        db.insert("Task", null, contentValues);
+        String listId;
+        listId= idSelect(taskName);
+        miniInsert(taskName, taskDescription, taskFinished, listId);
         return true;
     }
 
@@ -134,7 +146,7 @@ public class DBUtils extends SQLiteOpenHelper{
         contentValues.put("taskListName", taskName);
         contentValues.put("taskListCreatedAt", taskListCreatedAt);
         contentValues.put("taskListEnds", end);
-        db.update("TaskList", contentValues, "tasklistId = ? ", new String[] { Integer.toString(id) });
+        db.update("TaskList", contentValues, "TaskList.tasklistId = ? ", new String[] { Integer.toString(id) });
         return true;
     }
 
