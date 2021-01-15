@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.exassert.Preconditions;
+import com.github.antoinejt.atodo.DBUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class TaskListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView rv = view.findViewById(R.id.task_list);
-        TaskListAdapter adapter = new TaskListAdapter(genDummyTasks(300));
+        TaskListAdapter adapter = new TaskListAdapter(DBUtils.getTasks());
         rv.setAdapter(adapter);
         rv.setHasFixedSize(true);
 

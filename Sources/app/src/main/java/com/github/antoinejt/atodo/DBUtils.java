@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import java.util.ArrayList;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -97,22 +98,22 @@ public class DBUtils extends SQLiteOpenHelper{
 
     public Integer deleteTaskList(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("TaskList", "id = ? ", new String[] { Integer.toString(id) });
+        return db.delete("TaskList", "tasklistId = ? ", new String[] { Integer.toString(id) });
     }
 
     public Integer deleteCategory(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("Category", "id = ? ", new String[] { Integer.toString(id) });
+        return db.delete("Category", "categoryId = ? ", new String[] { Integer.toString(id) });
     }
 
     public Integer deleteAlert(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("Alert", "id = ? ", new String[] { Integer.toString(id) });
+        return db.delete("Alert", "alertId = ? ", new String[] { Integer.toString(id) });
     }
 
     public Integer deleteTask(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("Task", "id = ? ", new String[] { Integer.toString(id) });
+        return db.delete("Task", "taskId = ? ", new String[] { Integer.toString(id) });
     }
 
 
@@ -123,7 +124,7 @@ public class DBUtils extends SQLiteOpenHelper{
         contentValues.put("taskName", taskName);
         contentValues.put("taskDescription", taskDescription);
         contentValues.put("taskFinished", taskFinished);
-        db.update("Task", contentValues, "id = ? ", new String[] { Integer.toString(id) });
+        db.update("Task", contentValues, "taskId = ? ", new String[] { Integer.toString(id) });
         return true;
     }
 
@@ -133,7 +134,7 @@ public class DBUtils extends SQLiteOpenHelper{
         contentValues.put("taskListName", taskName);
         contentValues.put("taskListCreatedAt", taskListCreatedAt);
         contentValues.put("taskListEnds", end);
-        db.update("TaskList", contentValues, "id = ? ", new String[] { Integer.toString(id) });
+        db.update("TaskList", contentValues, "tasklistId = ? ", new String[] { Integer.toString(id) });
         return true;
     }
 
@@ -142,7 +143,7 @@ public class DBUtils extends SQLiteOpenHelper{
         ContentValues contentValues = new ContentValues();
         contentValues.put("categoryName", categoryName);
         contentValues.put("categoryDescription", categoryDescription);
-        db.update("Category", contentValues, "id = ? ", new String[] { Integer.toString(id) });
+        db.update("Category", contentValues, "categoryId = ? ", new String[] { Integer.toString(id) });
         return true;
     }
 
@@ -150,8 +151,36 @@ public class DBUtils extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("alertsAt", alertsAt);
-        db.update("Alert", contentValues, "id = ? ", new String[] { Integer.toString(id) });
+        db.update("Alert", contentValues, "alertId = ? ", new String[] { Integer.toString(id) });
         return true;
     }
 
+    public static ArrayList<String> getTasks() {
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select taskName, taskDescription from Task", null );
+        res.moveToFirst();
+
+        while(!res.isAfterLast()){
+            array_list.add(res.getString(res.getColumnIndex("taskName"));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+/*
+    public ArrayList<String> getTask() {
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Task", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex("Task"));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+*/
 }
