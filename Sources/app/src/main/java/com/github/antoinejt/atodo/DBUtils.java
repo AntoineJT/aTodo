@@ -88,7 +88,24 @@ public class DBUtils extends SQLiteOpenHelper {
         miniInsert(taskName, taskDescription, taskFinished, listId);
         return true;
     }
-
+    
+/*
+    public boolean insertTask(String taskName, String taskDescription, String taskFinished) {
+        SQLiteDatabase wdb = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("taskName",taskName);
+        contentValues.put("taskDescription",taskDescription);
+        wdb.query("Task",new String[] {"taskId"},"taskIdList");
+        contentValues.put();
+        contentValues.put("taskFinished",taskFinished);
+        //db.rawQuery("INSERT INTO Task (TaskName, TaskDescription, TaskFinished) VALUES (?, ?, ?) WHERE TaskList.taskListId = ?", null);
+        //db.rawQuery("INSERT INTO Task (taskName, taskDescription, taskFinished) VALUES (?, ?, ?)", new String[] {"", "", ""});
+        wdb.insert("Task",null, null);//Blank insert
+        wdb.update("Task", contentValues,"taskId = (SELECT MAX(idTask) FROM Task)",null);
+        //db.rawQuery("UPDATE Task SET taskId = (SELECT MAX(idTaskList) FROM TaskList), taskName = ?, taskDescription = ?, taskFinished = ? WHERE taskId = (SELECT MAX(idTask) FROM Task)",new String[] {taskName, taskDescription, taskFinished});
+        return true;
+    }
+*/
     public boolean createCategory(String categoryName, String categoryDescription){
         ContentValues contentValues = new ContentValues();
         contentValues.put("categoryName", categoryName);
