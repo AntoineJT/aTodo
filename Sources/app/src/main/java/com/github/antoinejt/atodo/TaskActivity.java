@@ -29,13 +29,18 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
         Button okayButton = findViewById(R.id.buttonOkay);
         okayButton.setOnClickListener(v -> {
             boolean succeed = createTask();
-            Snackbar.make(v, succeed ? "Task saved correctly" : "Error while saving task", 750)
-                    .addCallback(new Snackbar.Callback() {
-                        @Override
-                        public void onDismissed(Snackbar snackbar, int event) {
-                            super.onDismissed(snackbar, event);
-                            Goto.changeActivity(activity, MainActivity.class);
-                        }}).show();
+            String status = succeed ? "Task saved correctly" : "Error while saving task";
+            Snackbar snack = Snackbar.make(v, status, 750);
+            if (succeed) {
+                snack.addCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        super.onDismissed(snackbar, event);
+                        Goto.changeActivity(activity, MainActivity.class);
+                    }
+                });
+            }
+            snack.show();
         });
     }
 
