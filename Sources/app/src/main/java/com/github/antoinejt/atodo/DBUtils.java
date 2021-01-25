@@ -60,52 +60,23 @@ public class DBUtils extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean createTaskList(String name, String createdAt, String end){
+    public long createTaskList(String name, String createdAt, String end){
         ContentValues contentValues = new ContentValues();
         contentValues.put("taskListName", name);
         contentValues.put("taskListCreatedAt", createdAt);
         contentValues.put("taskListEnds", end);
-        wdb.insert("TaskList", null, contentValues);
-        return true;
-    }
-    //TODO Review this insert thing, Task insert broken AF
-    public String idSelect(String name){
-        Cursor res =  wdb.rawQuery( "SELECT taskListId FROM Tasklist WHERE taskListName = ?", null );
-        System.err.print(res.toString());
-        return res.toString();
+        return wdb.insert("TaskList", null, contentValues);
     }
 
-    public void miniInsert(String taskName, String taskDescription, String taskFinished, String taskListId){
-        //db.rawQuery("INSERT INTO Task (TaskName, TaskDescription, TaskFinished) VALUES (?, ?, ?) WHERE TaskList.taskListId = ?", null);
-        wdb.rawQuery("INSERT INTO Task (taskName, taskDescription, taskFinished) VALUES (?, ?, ?)",
-                new String[] { taskName, taskDescription, taskFinished});
-    }
-
-    // imo we must keep the taskListId in the activity's data to pass it by parameter here
-    // to avoid doing an error-prone request (we can have 2 taskList named the same)
-    public boolean insertTask(String taskName, String taskDescription, String taskFinished) {
-        String listId = idSelect(taskName);
-        miniInsert(taskName, taskDescription, taskFinished, listId);
-        return true;
-    }
-    
-/*
-    public boolean insertTask(String taskName, String taskDescription, String taskFinished) {
-        SQLiteDatabase wdb = this.getWritableDatabase();
+    public long createTask(long taskListId, String taskName, String taskDescription, String taskFinished) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("taskName",taskName);
-        contentValues.put("taskDescription",taskDescription);
-        wdb.query("Task",new String[] {"taskId"},"taskIdList");
-        contentValues.put();
-        contentValues.put("taskFinished",taskFinished);
-        //db.rawQuery("INSERT INTO Task (TaskName, TaskDescription, TaskFinished) VALUES (?, ?, ?) WHERE TaskList.taskListId = ?", null);
-        //db.rawQuery("INSERT INTO Task (taskName, taskDescription, taskFinished) VALUES (?, ?, ?)", new String[] {"", "", ""});
-        wdb.insert("Task",null, null);//Blank insert
-        wdb.update("Task", contentValues,"taskId = (SELECT MAX(idTask) FROM Task)",null);
-        //db.rawQuery("UPDATE Task SET taskId = (SELECT MAX(idTaskList) FROM TaskList), taskName = ?, taskDescription = ?, taskFinished = ? WHERE taskId = (SELECT MAX(idTask) FROM Task)",new String[] {taskName, taskDescription, taskFinished});
-        return true;
+        contentValues.put("taskName", taskName);
+        contentValues.put("taskDescription", taskDescription);
+        contentValues.put("taskListId", taskListId);
+        contentValues.put("taskFinished", taskFinished);
+        return wdb.insert("Task",null, contentValues);
     }
-*/
+
     public boolean createCategory(String categoryName, String categoryDescription){
         ContentValues contentValues = new ContentValues();
         contentValues.put("categoryName", categoryName);
@@ -120,8 +91,6 @@ public class DBUtils extends SQLiteOpenHelper {
         wdb.insert("Alert", null, contentValues);
         return true;
     }
-
-
 
     public Integer deleteTaskList(Integer id) {
         return wdb.delete("TaskList", "tasklistId = ? ", new String[] { Integer.toString(id) });
@@ -138,8 +107,6 @@ public class DBUtils extends SQLiteOpenHelper {
     public Integer deleteTask(Integer id) {
         return wdb.delete("Task", "taskId = ? ", new String[] { Integer.toString(id) });
     }
-
-
 
     public boolean updateTask(int id, String taskName, String taskDescription, String taskFinished) {
         ContentValues contentValues = new ContentValues();
