@@ -28,7 +28,7 @@ public class DBUtils extends SQLiteOpenHelper {
                         "taskName TEXT NOT NULL," +
                         "taskDescription TEXT NOT NULL," +
                         "taskListId INTEGER NOT NULL," +
-                        "taskFinished INTEGER NOT NULL)"
+                        "taskFinished INTEGER NOT NULL DEFAULT 0 CHECK(taskFinished IN (0, 1)))"
         );
 
         db.execSQL(
@@ -113,7 +113,7 @@ public class DBUtils extends SQLiteOpenHelper {
         contentValues.put("taskName", taskName);
         contentValues.put("taskDescription", taskDescription);
         contentValues.put("taskFinished", taskFinished);
-        wdb.update("Task", contentValues, "taskId = ?", new String[] { String.valueOf(id)});
+        wdb.update("Task", contentValues, "taskId = ? ", new String[] { Integer.toString(id) });
         return true;
     }
 
@@ -142,7 +142,6 @@ public class DBUtils extends SQLiteOpenHelper {
     }
 
     public List<TaskItem> getTasks() {
-        // wdb.query("Task", new String[] { "taskName", "taskDescription" }, null, null, null, null, null);
         Cursor res =  wdb.rawQuery("SELECT taskName, taskDescription from Task", null);
         res.moveToFirst();
 
