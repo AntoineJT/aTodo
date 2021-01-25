@@ -47,18 +47,20 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDate = sdf.format(new Date());
 
-            EditText editTaskName = (EditText) findViewById(R.id.fieldTaskName);
+            EditText editTaskName = findViewById(R.id.fieldTaskName);
             String taskName = editTaskName.getText().toString();
 
-            EditText editTaskEnd = (EditText) findViewById(R.id.fieldTaskEnd);
+            EditText editTaskEnd = findViewById(R.id.fieldTaskEnd);
             String taskEnd = editTaskEnd.getText().toString();
 
-            EditText editTaskDescription = (EditText) findViewById(R.id.fieldTaskDescription);
+            EditText editTaskDescription = findViewById(R.id.fieldTaskDescription);
             String taskDescription = editTaskDescription.getText().toString();
 
-            result = db.createTaskList(taskName, currentDate, taskEnd) && db.insertTask(taskName,taskDescription, taskEnd);
-        }
+            long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
 
+            result = taskListId != -1
+                    && db.createTask(taskListId, taskName, taskDescription, taskEnd) != -1;
+        }
         return result;
     }
 
