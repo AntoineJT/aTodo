@@ -142,7 +142,7 @@ public class DBUtils extends SQLiteOpenHelper {
     }
 
     public List<TaskItem> getTasks() {
-        Cursor res =  wdb.rawQuery( "SELECT taskName, taskDescription from Task", null );
+        Cursor res =  wdb.rawQuery("SELECT taskName, taskDescription from Task", null);
         res.moveToFirst();
 
         List<TaskItem> taskItems = new ArrayList<>();
@@ -153,6 +153,7 @@ public class DBUtils extends SQLiteOpenHelper {
             taskItems.add(new TaskItem(name, description));
             res.moveToNext();
         }
+        res.close();
         return taskItems;
     }
 /*
