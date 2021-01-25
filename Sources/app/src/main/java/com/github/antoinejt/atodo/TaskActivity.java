@@ -30,7 +30,7 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
         okayButton.setOnClickListener(v -> {
             boolean succeed = createTask();
             String status = succeed ? "Task saved correctly" : "Error while saving task";
-            Snackbar snack = Snackbar.make(v, status, 750);
+            Snackbar snack = Snackbar.make(v, status, 350);
             if (succeed) {
                 snack.addCallback(new Snackbar.Callback() {
                     @Override
@@ -64,7 +64,7 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
             long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
 
             result = taskListId != -1
-                    && db.createTask(taskListId, taskName, taskDescription, taskEnd) != -1;
+                    && db.createTask(taskListId, taskName, taskDescription) != -1;
         }
         return result;
     }
