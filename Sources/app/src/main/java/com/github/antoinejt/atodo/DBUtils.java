@@ -27,7 +27,7 @@ public class DBUtils extends SQLiteOpenHelper {
                         "taskId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                         "taskName TEXT NOT NULL," +
                         "taskDescription TEXT NOT NULL," +
-                        "taskListId TEXT NOT NULL," +
+                        "taskListId INTEGER NOT NULL," +
                         "taskFinished INTEGER NOT NULL DEFAULT 0 CHECK(taskFinished IN (0, 1)))"
         );
 
