@@ -16,7 +16,7 @@ public class DBUtils extends SQLiteOpenHelper {
     private final SQLiteDatabase wdb;
 
     public DBUtils(Context context) {
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME , null, 4);
         this.wdb = getWritableDatabase();
     }
 
@@ -68,12 +68,11 @@ public class DBUtils extends SQLiteOpenHelper {
         return wdb.insert("TaskList", null, contentValues);
     }
 
-    public long createTask(long taskListId, String taskName, String taskDescription, String taskFinished) {
+    public long createTask(long taskListId, String taskName, String taskDescription) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("taskName", taskName);
         contentValues.put("taskDescription", taskDescription);
         contentValues.put("taskListId", taskListId);
-        contentValues.put("taskFinished", taskFinished);
         return wdb.insert("Task",null, contentValues);
     }
 
@@ -113,7 +112,7 @@ public class DBUtils extends SQLiteOpenHelper {
         contentValues.put("taskName", taskName);
         contentValues.put("taskDescription", taskDescription);
         contentValues.put("taskFinished", taskFinished);
-        wdb.update("Task", contentValues, "taskId = ? ", new String[] { Integer.toString(id) });
+        wdb.update("Task", contentValues, "taskId = ?", new String[] { Integer.toString(id) });
         return true;
     }
 
@@ -142,6 +141,7 @@ public class DBUtils extends SQLiteOpenHelper {
     }
 
     public List<TaskItem> getTasks() {
+        // wdb.query("Task", new String[] { "taskName", "taskDescription" }, null, null, null, null, null);
         Cursor res =  wdb.rawQuery("SELECT taskName, taskDescription from Task", null);
         res.moveToFirst();
 
