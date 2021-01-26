@@ -1,6 +1,5 @@
 package com.github.antoinejt.atodo.activities;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.DBUtils;
+import com.github.antoinejt.atodo.utils.DateFormatter;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
@@ -90,8 +89,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
                 return TaskCreationStatus.DATE_FORMAT;
             }
 
-            final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            final boolean succeed = db.createTask(name, description, sdf.parse(deadline)) != -1;
+            final boolean succeed = db.createTask(name, description, DateFormatter.formatter.parse(deadline)) != -1;
 
             return succeed ? TaskCreationStatus.OK : TaskCreationStatus.ERROR;
         } catch (Exception e) {

@@ -3,10 +3,13 @@ package com.github.antoinejt.atodo.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.atodo.utils.DBUtils;
+import com.github.antoinejt.atodo.utils.DateFormatter;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -14,6 +17,10 @@ import com.google.android.material.snackbar.Snackbar;
 //   I can't do anything about it, that's how Android apps are built.
 @SuppressWarnings("java:S110")
 public class EditTaskActivity extends AppCompatActivity {
+    private EditText findEditText(int id) {
+        return (EditText) findViewById(id);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +30,10 @@ public class EditTaskActivity extends AppCompatActivity {
 
         final TaskItem item = (TaskItem) getIntent().getSerializableExtra("taskData");
         try (DBUtils db = DBUtils.get(this.getApplicationContext())) {
-            // TODO Fill the controls with current values
+            findEditText(R.id.fieldTaskName).setText(item.title);
+            findEditText(R.id.fieldTaskDescription).setText(item.description);
+            findEditText(R.id.fieldTaskEnd).setText(DateFormatter.formatter.format(item.deadline));
+            ((CheckBox) findViewById(R.id.fieldIsTaskFinished)).setChecked(item.isFinished);
 
             findViewById(R.id.buttonEdit).setOnClickListener(listener -> {
                 // TODO Find a way to transmit the task id here
