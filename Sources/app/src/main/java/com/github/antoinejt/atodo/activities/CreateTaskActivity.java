@@ -50,7 +50,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         return ((EditText) findViewById(id)).getText().toString();
     }
 
-    public enum TaskCreationStatus {
+    enum TaskCreationStatus {
         OK("Task saved correctly!"),
         EMPTY_FIELDS("Error: Some fields are empty!"),
         DATE_FORMAT("Error: Date format is incorrect!"),
@@ -70,9 +70,6 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     private TaskCreationStatus createTask() {
         //TODO Verify getApplicationContext / getBaseContext
         try (DBUtils db = new DBUtils(this.getApplicationContext())) {
-            final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            final String currentDate = sdf.format(new Date());
-
             final List<Integer> fieldsId = Arrays.asList(
                     R.id.fieldTaskName,
                     R.id.fieldTaskEnd,
@@ -94,9 +91,8 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
                 return TaskCreationStatus.DATE_FORMAT;
             }
 
-            final long taskListId = db.createTaskList(name, currentDate, deadline);
-            final boolean succeed = taskListId != -1
-                    && db.createTask(taskListId, name, description) != -1;
+            final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            final boolean succeed = db.createTask(name, description, sdf.parse(deadline)) != -1;
 
             return succeed ? TaskCreationStatus.OK : TaskCreationStatus.ERROR;
         } catch (Exception e) {

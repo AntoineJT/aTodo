@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.exassert.Preconditions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DBUtils extends SQLiteOpenHelper {
@@ -16,7 +18,7 @@ public class DBUtils extends SQLiteOpenHelper {
     private final SQLiteDatabase wdb;
 
     public DBUtils(Context context) {
-        super(context, DATABASE_NAME , null, 4);
+        super(context, DATABASE_NAME, null, 5);
         this.wdb = getWritableDatabase();
     }
 
@@ -27,17 +29,11 @@ public class DBUtils extends SQLiteOpenHelper {
                         "taskId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                         "taskName TEXT NOT NULL," +
                         "taskDescription TEXT NOT NULL," +
-                        "taskListId INTEGER NOT NULL," +
+                        "taskCreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
+                        "taskEnds DATETIME NOT NULL," +
                         "taskFinished INTEGER NOT NULL DEFAULT 0 CHECK(taskFinished IN (0, 1)))"
         );
 
-        db.execSQL(
-                "CREATE TABLE TaskList (" +
-                        "tasklistId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                        "tasklistName TEXT NOT NULL," +
-                        "taskListCreatedAt DATETIME NOT NULL," +
-                        "taskListEnds DATETIME NOT NULL)"
-        );
         db.execSQL(
                 "CREATE TABLE Category(" +
                         "categoryId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
@@ -54,100 +50,85 @@ public class DBUtils extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Task");
-        db.execSQL("DROP TABLE IF EXISTS TaskList");
         db.execSQL("DROP TABLE IF EXISTS Category");
         db.execSQL("DROP TABLE IF EXISTS Alert");
         onCreate(db);
     }
 
-    public long createTaskList(String name, String createdAt, String end){
-        // TODO Test if it inserts correct taskListEnds values
+    public long createTask(String name, String description, Date deadline) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("taskListName", name);
-        contentValues.put("taskListCreatedAt", createdAt);
-        contentValues.put("taskListEnds", end);
-        return wdb.insert("TaskList", null, contentValues);
+        contentValues.put("taskName", name);
+        contentValues.put("taskDescription", description);
+        contentValues.put("taskEnds", deadline.getTime());
+        return wdb.insert("Task", null, contentValues);
     }
 
-    public long createTask(long taskListId, String taskName, String taskDescription) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("taskName", taskName);
-        contentValues.put("taskDescription", taskDescription);
-        contentValues.put("taskListId", taskListId);
-        return wdb.insert("Task",null, contentValues);
-    }
-
-    public boolean createCategory(String categoryName, String categoryDescription){
+    public long createCategory(String categoryName, String categoryDescription) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("categoryName", categoryName);
         contentValues.put("categoryDescription", categoryDescription);
-        wdb.insert("Category", null, contentValues);
-        return true;
+        return wdb.insert("Category", null, contentValues);
     }
 
-    public boolean createAlert(String alertsAt){
+    public long createAlert(String alertsAt) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("alertsAt", alertsAt);
-        wdb.insert("Alert", null, contentValues);
-        return true;
+        return wdb.insert("Alert", null, contentValues);
     }
 
-    public Integer deleteTaskList(Integer id) {
-        return wdb.delete("TaskList", "tasklistId = ? ", new String[] { Integer.toString(id) });
+    public boolean deleteCategory(int id) {
+        Preconditions.requiresUnsigned(id);
+        return wdb.delete("Category", "categoryId = ? ", new String[]{Integer.toString(id)}) == 1;
     }
 
-    public Integer deleteCategory(Integer id) {
-        return wdb.delete("Category", "categoryId = ? ", new String[] { Integer.toString(id) });
+    public boolean deleteAlert(int id) {
+        Preconditions.requiresUnsigned(id);
+        return wdb.delete("Alert", "alertId = ? ", new String[]{Integer.toString(id)}) == 1;
     }
 
-    public Integer deleteAlert(Integer id) {
-        return wdb.delete("Alert", "alertId = ? ", new String[] { Integer.toString(id) });
+    public boolean deleteTask(int id) {
+        Preconditions.requiresUnsigned(id);
+        return wdb.delete("Task", "taskId = ? ", new String[]{Integer.toString(id)}) == 1;
     }
 
-    public Integer deleteTask(Integer id) {
-        return wdb.delete("Task", "taskId = ? ", new String[] { Integer.toString(id) });
-    }
+    public boolean updateTask(int id, String name, String description, Date deadline, boolean finished) {
+        Preconditions.requiresUnsigned(id);
 
-    public boolean updateTask(int id, String taskName, String taskDescription, String taskFinished) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("taskName", taskName);
-        contentValues.put("taskDescription", taskDescription);
-        contentValues.put("taskFinished", taskFinished);
-        wdb.update("Task", contentValues, "taskId = ?", new String[] { Integer.toString(id) });
-        return true;
-    }
+        contentValues.put("taskName", name);
+        contentValues.put("taskDescription", description);
+        contentValues.put("taskEnds", deadline.getTime());
+        contentValues.put("taskFinished", finished ? 1 : 0);
 
-    public boolean updateTaskList(int id, String taskName, String taskListCreatedAt, String end) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("taskListName", taskName);
-        contentValues.put("taskListCreatedAt", taskListCreatedAt);
-        contentValues.put("taskListEnds", end);
-        wdb.update("TaskList", contentValues, "TaskList.tasklistId = ? ", new String[] { Integer.toString(id) });
-        return true;
+        return wdb.update("Task", contentValues, "taskId = ?", new String[]{Integer.toString(id)}) == 1;
     }
 
     public boolean updateCategory(int id, String categoryName, String categoryDescription) {
+        Preconditions.requiresUnsigned(id);
+
         ContentValues contentValues = new ContentValues();
         contentValues.put("categoryName", categoryName);
         contentValues.put("categoryDescription", categoryDescription);
-        wdb.update("Category", contentValues, "categoryId = ? ", new String[] { Integer.toString(id) });
-        return true;
+
+        return wdb.update("Category", contentValues, "categoryId = ? ", new String[]{Integer.toString(id)}) == 1;
     }
 
     public boolean updateAlert(int id, String alertsAt) {
+        Preconditions.requiresUnsigned(id);
+
         ContentValues contentValues = new ContentValues();
         contentValues.put("alertsAt", alertsAt);
-        wdb.update("Alert", contentValues, "alertId = ? ", new String[] { Integer.toString(id) });
-        return true;
+
+        return wdb.update("Alert", contentValues, "alertId = ? ", new String[]{Integer.toString(id)}) == 1;
     }
 
     public List<TaskItem> getTasks() {
         // wdb.query("Task", new String[] { "taskName", "taskDescription" }, null, null, null, null, null);
-        Cursor res =  wdb.rawQuery("SELECT taskName, taskDescription from Task", null);
+        Cursor res = wdb.rawQuery("SELECT taskName, taskDescription from Task", null);
         res.moveToFirst();
 
         List<TaskItem> taskItems = new ArrayList<>();
-        while(!res.isAfterLast()){
+        while (!res.isAfterLast()) {
             String name = res.getString(res.getColumnIndex("taskName"));
             String description = res.getString(res.getColumnIndex("taskDescription"));
 
