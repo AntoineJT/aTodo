@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.exassert.Preconditions;
-import com.github.antoinejt.atodo.DBUtils;
+import com.github.antoinejt.atodo.utils.DBUtils;
 
 import java.util.ArrayList;
 import java.util.List;

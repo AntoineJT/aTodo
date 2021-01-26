@@ -1,4 +1,4 @@
-package com.github.antoinejt.atodo;
+package com.github.antoinejt.atodo.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
