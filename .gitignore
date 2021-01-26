@@ -1,7 +1,3 @@
-.vs/
-bin/
-obj/
-*.csproj.user
 # Word temp file
 ~$*
 # Looping backup file
