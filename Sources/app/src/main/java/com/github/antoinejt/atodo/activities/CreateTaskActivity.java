@@ -31,12 +31,9 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
 
         final AppCompatActivity activity = this;
         findViewById(R.id.buttonCreate).setOnClickListener(listener -> {
-            final boolean succeed = createTask();
-            final String status = succeed
-                    ? "Task saved correctly"
-                    : "Error while saving task (are all fields filled?)";
-            Snackbar snack = Snackbar.make(listener, status, 350);
-            if (succeed) {
+            final TaskCreationStatus status = createTask();
+            final Snackbar snack = Snackbar.make(listener, status.getStatus(), 350);
+            if (status == TaskCreationStatus.OK) {
                 snack.addCallback(new Snackbar.Callback() {
                     @Override
                     public void onDismissed(Snackbar snackbar, int event) {
@@ -53,35 +50,55 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         return ((EditText) findViewById(id)).getText().toString();
     }
 
-    private boolean createTask() {
+    public enum TaskCreationStatus {
+        OK("Task saved correctly!"),
+        EMPTY_FIELDS("Error: Some fields are empty!"),
+        DATE_FORMAT("Error: Date format is incorrect!"),
+        ERROR("Error while saving the database!");
+
+        private final String status;
+
+        TaskCreationStatus(String status) {
+            this.status = status;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+    }
+
+    private TaskCreationStatus createTask() {
         //TODO Verify getApplicationContext / getBaseContext
         try (DBUtils db = new DBUtils(this.getApplicationContext())) {
             final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             final String currentDate = sdf.format(new Date());
 
-            // TODO S'occuper de la deadline
-
-            final List<Integer> fieldsId =
-                    Arrays.asList(R.id.fieldTaskName, R.id.fieldTaskEnd, R.id.fieldTaskDescription);
-            // order: name, end, description
+            final List<Integer> fieldsId = Arrays.asList(
+                    R.id.fieldTaskName,
+                    R.id.fieldTaskEnd,
+                    R.id.fieldTaskDescription);
+            // order: name, deadline, description
             final List<String> values = fieldsId.stream()
                     .map(this::getEditTextValue)
                     .collect(Collectors.toList());
 
             if (values.stream().anyMatch(String::isEmpty)) {
-                return false;
+                return TaskCreationStatus.EMPTY_FIELDS;
             }
 
-            final String taskName = values.get(0);
-            final String taskEnd = values.get(1);
-            final String taskDescription = values.get(2);
+            final String name = values.get(0);
+            final String deadline = values.get(1);
+            final String description = values.get(2);
 
-            final long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
+            // TODO Check deadline (taskEnd) format is correct
 
-            return taskListId != -1
-                    && db.createTask(taskListId, taskName, taskDescription) != -1;
+            final long taskListId = db.createTaskList(name, currentDate, deadline);
+            final boolean succeed = taskListId != -1
+                    && db.createTask(taskListId, name, description) != -1;
+
+            return succeed ? TaskCreationStatus.OK : TaskCreationStatus.ERROR;
         } catch (Exception e) {
-            return false;
+            return TaskCreationStatus.ERROR;
         }
     }
 
