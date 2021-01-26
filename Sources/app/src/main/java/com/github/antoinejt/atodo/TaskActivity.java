@@ -28,7 +28,7 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
         final AppCompatActivity activity = this;
         Button okayButton = findViewById(R.id.buttonOkay);
         okayButton.setOnClickListener(v -> {
-            boolean succeed = createTask();
+            final boolean succeed = createTask();
             String status = succeed ? "Task saved correctly" : "Error while saving task";
             Snackbar snack = Snackbar.make(v, status, 350);
             if (succeed) {
@@ -44,10 +44,8 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private boolean createTask(){
+    private boolean createTask() {
         //TODO Verify getApplicationContext / getBaseContext
-        boolean result;
-
         try (DBUtils db = new DBUtils(this.getApplicationContext())) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDate = sdf.format(new Date());
@@ -63,13 +61,15 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
 
             long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
 
-            result = taskListId != -1
+            return taskListId != -1
                     && db.createTask(taskListId, taskName, taskDescription) != -1;
+        } catch (Exception e) {
+            return false;
         }
-        return result;
     }
 
     @Override
     public void onClick(View v) {
+        // we don't care of this event
     }
 }
