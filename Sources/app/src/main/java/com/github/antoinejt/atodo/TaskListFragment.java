@@ -13,7 +13,9 @@ import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.exassert.Preconditions;
 import com.github.antoinejt.atodo.utils.DBUtils;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TaskListFragment extends Fragment {
@@ -46,7 +48,8 @@ public class TaskListFragment extends Fragment {
 
         List<TaskItem> result = new ArrayList<>();
         for (int i = 1; i <= count; ++i) {
-            TaskItem item = new TaskItem("Tâche n°" + i, "Grosse description omg");
+            Date now = Date.from(Instant.now());
+            TaskItem item = new TaskItem(i, "Tâche n°" + i, "Grosse description omg", now, now, true);
             result.add(item);
         }
         return result;

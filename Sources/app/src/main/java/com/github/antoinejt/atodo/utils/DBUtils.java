@@ -76,22 +76,22 @@ public class DBUtils extends SQLiteOpenHelper {
         return wdb.insert("Alert", null, contentValues);
     }
 
-    public boolean deleteCategory(int id) {
+    public boolean deleteCategory(long id) {
         Preconditions.requiresUnsigned(id);
-        return wdb.delete("Category", "categoryId = ? ", new String[]{Integer.toString(id)}) == 1;
+        return wdb.delete("Category", "categoryId = ? ", new String[]{Long.toString(id)}) == 1;
     }
 
-    public boolean deleteAlert(int id) {
+    public boolean deleteAlert(long id) {
         Preconditions.requiresUnsigned(id);
-        return wdb.delete("Alert", "alertId = ? ", new String[]{Integer.toString(id)}) == 1;
+        return wdb.delete("Alert", "alertId = ? ", new String[]{Long.toString(id)}) == 1;
     }
 
-    public boolean deleteTask(int id) {
+    public boolean deleteTask(long id) {
         Preconditions.requiresUnsigned(id);
-        return wdb.delete("Task", "taskId = ? ", new String[]{Integer.toString(id)}) == 1;
+        return wdb.delete("Task", "taskId = ? ", new String[]{Long.toString(id)}) == 1;
     }
 
-    public boolean updateTask(int id, String name, String description, Date deadline, boolean finished) {
+    public boolean updateTask(long id, String name, String description, Date deadline, boolean finished) {
         Preconditions.requiresUnsigned(id);
 
         ContentValues contentValues = new ContentValues();
@@ -100,42 +100,62 @@ public class DBUtils extends SQLiteOpenHelper {
         contentValues.put("taskEnds", deadline.getTime());
         contentValues.put("taskFinished", finished ? 1 : 0);
 
-        return wdb.update("Task", contentValues, "taskId = ?", new String[]{Integer.toString(id)}) == 1;
+        return wdb.update("Task", contentValues, "taskId = ?", new String[]{Long.toString(id)}) == 1;
     }
 
-    public boolean updateCategory(int id, String categoryName, String categoryDescription) {
+    public boolean updateCategory(long id, String categoryName, String categoryDescription) {
         Preconditions.requiresUnsigned(id);
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("categoryName", categoryName);
         contentValues.put("categoryDescription", categoryDescription);
 
-        return wdb.update("Category", contentValues, "categoryId = ? ", new String[]{Integer.toString(id)}) == 1;
+        return wdb.update("Category", contentValues, "categoryId = ? ", new String[]{Long.toString(id)}) == 1;
     }
 
-    public boolean updateAlert(int id, String alertsAt) {
+    public boolean updateAlert(long id, String alertsAt) {
         Preconditions.requiresUnsigned(id);
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("alertsAt", alertsAt);
 
-        return wdb.update("Alert", contentValues, "alertId = ? ", new String[]{Integer.toString(id)}) == 1;
+        return wdb.update("Alert", contentValues, "alertId = ? ", new String[]{Long.toString(id)}) == 1;
+    }
+
+    private long asLong(Cursor cursor, String field) {
+        return cursor.getLong(cursor.getColumnIndex(field));
+    }
+
+    private Date asDate(Cursor cursor, String field) {
+        return new Date(asLong(cursor, field));
+    }
+
+    private String asString(Cursor cursor, String field) {
+        return cursor.getString(cursor.getColumnIndex(field));
+    }
+
+    private int asInt(Cursor cursor, String field) {
+        return cursor.getInt(cursor.getColumnIndex(field));
     }
 
     public List<TaskItem> getTasks() {
         // wdb.query("Task", new String[] { "taskName", "taskDescription" }, null, null, null, null, null);
-        Cursor res = wdb.rawQuery("SELECT taskName, taskDescription from Task", null);
-        res.moveToFirst();
+        Cursor cursor = wdb.rawQuery("SELECT * from Task", null);
+        cursor.moveToFirst();
 
         List<TaskItem> taskItems = new ArrayList<>();
-        while (!res.isAfterLast()) {
-            String name = res.getString(res.getColumnIndex("taskName"));
-            String description = res.getString(res.getColumnIndex("taskDescription"));
+        while (!cursor.isAfterLast()) {
+            final long id = asLong(cursor, "taskId");
+            final String name = asString(cursor, "taskName");
+            final String description = asString(cursor, "taskDescription");
+            final Date createdAt = asDate(cursor, "taskCreatedAt");
+            final Date deadline = asDate(cursor, "taskEnds");
+            final boolean isFinished = asInt(cursor, "taskFinished") == 1;
 
-            taskItems.add(new TaskItem(name, description));
-            res.moveToNext();
+            taskItems.add(new TaskItem(id, name, description, createdAt, deadline, isFinished));
+            cursor.moveToNext();
         }
-        res.close();
+        cursor.close();
         return taskItems;
     }
 /*

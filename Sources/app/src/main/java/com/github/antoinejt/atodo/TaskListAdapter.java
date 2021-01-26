@@ -37,7 +37,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         TaskItem item = taskList.get(position);
 
         holder.getTitle().setText(item.title);
-        holder.getShortDescription().setText(item.shortDescription);
+        holder.getDescription().setText(item.description);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            itemView.setOnClickListener((View view) ->
+            itemView.setOnClickListener(view ->
                     Goto.changeActivity(MainActivity.getInstance(), EditTaskActivity.class));
         }
 
@@ -57,8 +57,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             return itemView.findViewById(R.id.task_title);
         }
 
-        protected TextView getShortDescription() {
-            return itemView.findViewById(R.id.task_short_desc);
+        protected TextView getDescription() {
+            return itemView.findViewById(R.id.task_desc);
         }
     }
 }
