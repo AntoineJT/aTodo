@@ -61,6 +61,7 @@ public class DBUtils extends SQLiteOpenHelper {
     }
 
     public long createTaskList(String name, String createdAt, String end){
+        // TODO Test if it inserts correct taskListEnds values
         ContentValues contentValues = new ContentValues();
         contentValues.put("taskListName", name);
         contentValues.put("taskListCreatedAt", createdAt);

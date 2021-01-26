@@ -90,7 +90,9 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
             final String deadline = values.get(1);
             final String description = values.get(2);
 
-            // TODO Check deadline (taskEnd) format is correct
+            if (!isDeadlineCorrect(deadline)) {
+                return TaskCreationStatus.DATE_FORMAT;
+            }
 
             final long taskListId = db.createTaskList(name, currentDate, deadline);
             final boolean succeed = taskListId != -1
@@ -100,6 +102,17 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         } catch (Exception e) {
             return TaskCreationStatus.ERROR;
         }
+    }
+
+    private boolean isDeadlineCorrect(String deadline) {
+        String[] split = deadline.split("/");
+        if (split.length != 3) {
+            return false;
+        }
+
+        return split[0].length() == 2
+                && split[1].length() == 2
+                && split[2].length() == 4;
     }
 
     @Override
