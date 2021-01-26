@@ -58,7 +58,7 @@
         android:id="@+id/buttonDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonConfirm"
+        android:layout_below="@id/buttonEdit"
         android:backgroundTint="#DD3333"
         android:textColor="#FFFFFF"
         android:text="Delete" />

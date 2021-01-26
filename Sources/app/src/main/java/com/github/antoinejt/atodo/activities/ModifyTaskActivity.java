@@ -23,6 +23,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
 
         findViewById(R.id.buttonEdit).setOnClickListener(listener -> {
             // TODO Find a way to transmit the task id here
+            Snackbar.make(listener, "To implement", 500).show();
         });
 
         findViewById(R.id.buttonDelete).setOnClickListener(listener -> {
