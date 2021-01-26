@@ -1,4 +1,4 @@
-package com.github.antoinejt.atodo.dataclasses;
+package com.github.antoinejt.atodo.models;
 
 import java.io.Serializable;
 import java.util.Date;

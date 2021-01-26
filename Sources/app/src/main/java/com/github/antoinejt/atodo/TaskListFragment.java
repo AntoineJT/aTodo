@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.atodo.models.TaskItem;
 import com.github.antoinejt.exassert.Preconditions;
-import com.github.antoinejt.atodo.utils.DBUtils;
+import com.github.antoinejt.atodo.utils.DatabaseHandler;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class TaskListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.task_list);
-        try (DBUtils db = DBUtils.get(this.getContext())) {
+        try (DatabaseHandler db = DatabaseHandler.get(this.getContext())) {
             TaskListAdapter adapter = new TaskListAdapter(db.getTasks());
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);

@@ -6,7 +6,7 @@ import android.content.Intent;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.atodo.models.TaskItem;
 
 import java.util.Objects;
 

@@ -6,26 +6,26 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.atodo.models.TaskItem;
 import com.github.antoinejt.exassert.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DBUtils extends SQLiteOpenHelper {
+public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Database.db";
-    private static DBUtils instance;
+    private static DatabaseHandler instance;
     private final SQLiteDatabase wdb;
 
-    public static DBUtils get(Context context) {
+    public static DatabaseHandler get(Context context) {
         if (instance == null) {
-            instance = new DBUtils(context);
+            instance = new DatabaseHandler(context);
         }
         return instance;
     }
 
-    private DBUtils(Context context) {
+    private DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, 5);
         this.wdb = getWritableDatabase();
     }

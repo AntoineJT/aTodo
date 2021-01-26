@@ -7,7 +7,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.antoinejt.atodo.R;
-import com.github.antoinejt.atodo.utils.DBUtils;
+import com.github.antoinejt.atodo.utils.DatabaseHandler;
 import com.github.antoinejt.atodo.utils.DateFormatter;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
@@ -66,7 +66,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     }
 
     private TaskCreationStatus createTask() {
-        try (DBUtils db = DBUtils.get(this.getApplicationContext())) {
+        try (DatabaseHandler db = DatabaseHandler.get(this.getApplicationContext())) {
             final List<Integer> fieldsId = Arrays.asList(
                     R.id.fieldTaskName,
                     R.id.fieldTaskEnd,

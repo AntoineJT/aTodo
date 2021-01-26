@@ -7,8 +7,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.github.antoinejt.atodo.R;
-import com.github.antoinejt.atodo.dataclasses.TaskItem;
-import com.github.antoinejt.atodo.utils.DBUtils;
+import com.github.antoinejt.atodo.models.TaskItem;
+import com.github.antoinejt.atodo.utils.DatabaseHandler;
 import com.github.antoinejt.atodo.utils.DateFormatter;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,7 +32,7 @@ public class EditTaskActivity extends AppCompatActivity {
         Goto.addBackButton(getSupportActionBar());
 
         final TaskItem item = (TaskItem) getIntent().getSerializableExtra("taskData");
-        try (DBUtils db = DBUtils.get(this.getApplicationContext())) {
+        try (DatabaseHandler db = DatabaseHandler.get(this.getApplicationContext())) {
             final EditText nameField = findEditText(R.id.fieldTaskName);
             final EditText descriptionField = findEditText(R.id.fieldTaskDescription);
             final EditText deadlineField = findEditText(R.id.fieldTaskEnd);

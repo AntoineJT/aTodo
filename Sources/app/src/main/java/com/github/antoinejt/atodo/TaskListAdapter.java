@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.activities.EditTaskActivity;
 import com.github.antoinejt.atodo.activities.MainActivity;
-import com.github.antoinejt.atodo.dataclasses.TaskItem;
+import com.github.antoinejt.atodo.models.TaskItem;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
 
