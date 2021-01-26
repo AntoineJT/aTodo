@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/taskNameField"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.TaskActivity">
+    tools:context=".activities.ModifyTaskActivity">
 
     <EditText
         android:id="@+id/fieldTaskName"
@@ -39,11 +40,27 @@
         android:layout_below="@id/fieldTaskEnd"
         android:text="Important (not implemented for now)" />
 
-    <Button
-        android:id="@+id/buttonOkay"
+    <CheckBox
+        android:id="@+id/fieldIsTaskFinished"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldIsTaskImportant"
-        android:text="Okay" />
+        android:text="Is finished?" />
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fieldIsTaskFinished"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonConfirm"
+        android:backgroundTint="#DD3333"
+        android:textColor="#FFFFFF"
+        android:text="Delete" />
 
 </RelativeLayout>

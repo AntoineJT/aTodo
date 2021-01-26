@@ -29,10 +29,10 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
 
         final AppCompatActivity activity = this;
         Button okayButton = findViewById(R.id.buttonOkay);
-        okayButton.setOnClickListener(v -> {
+        okayButton.setOnClickListener(listener -> {
             final boolean succeed = createTask();
             String status = succeed ? "Task saved correctly" : "Error while saving task";
-            Snackbar snack = Snackbar.make(v, status, 350);
+            Snackbar snack = Snackbar.make(listener, status, 350);
             if (succeed) {
                 snack.addCallback(new Snackbar.Callback() {
                     @Override
