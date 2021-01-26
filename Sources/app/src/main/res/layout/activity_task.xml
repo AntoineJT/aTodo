@@ -31,7 +31,7 @@
         android:layout_below="@id/fieldTaskDescription"
         android:ems="10"
         android:inputType="datetime"
-        android:hint="Deadline" />
+        android:hint="Deadline (DD/MM/YYYY)" />
 
     <CheckBox
         android:id="@+id/fieldIsTaskImportant"

@@ -1,17 +1,14 @@
 package com.github.antoinejt.atodo;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.github.antoinejt.atodo.utils.Goto;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import com.github.antoinejt.atodo.utils.Goto;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;
