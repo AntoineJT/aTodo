@@ -22,7 +22,7 @@ public class EditTaskActivity extends AppCompatActivity {
         Goto.addBackButton(getSupportActionBar());
 
         final TaskItem item = (TaskItem) getIntent().getSerializableExtra("taskData");
-        try (DBUtils db = new DBUtils(this.getApplicationContext())) {
+        try (DBUtils db = DBUtils.get(this.getApplicationContext())) {
             // TODO Fill the controls with current values
 
             findViewById(R.id.buttonEdit).setOnClickListener(listener -> {
@@ -36,7 +36,14 @@ public class EditTaskActivity extends AppCompatActivity {
                         ? "Task successfully deleted!"
                         : "Error while deleting task";
 
-                Snackbar.make(listener, status, 500).show();
+                final AppCompatActivity activity = this;
+                Snackbar.make(listener, status, 500).addCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        super.onDismissed(snackbar, event);
+                        Goto.changeActivity(activity, MainActivity.class);
+                    }
+                }).show();
             });
         } catch (Exception e) {
             e.printStackTrace();

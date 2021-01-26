@@ -15,11 +15,21 @@ import java.util.List;
 
 public class DBUtils extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Database.db";
+    private static DBUtils instance;
     private final SQLiteDatabase wdb;
 
-    public DBUtils(Context context) {
+    public static DBUtils get(Context context) {
+        return (instance == null) ? new DBUtils(context) : instance;
+    }
+
+    private DBUtils(Context context) {
         super(context, DATABASE_NAME, null, 5);
         this.wdb = getWritableDatabase();
+    }
+
+    @Override
+    public synchronized void close() {
+        // do nothing
     }
 
     @Override

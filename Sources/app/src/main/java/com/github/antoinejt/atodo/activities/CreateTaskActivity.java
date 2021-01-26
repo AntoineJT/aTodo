@@ -68,7 +68,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
 
     private TaskCreationStatus createTask() {
         //TODO Verify getApplicationContext / getBaseContext
-        try (DBUtils db = new DBUtils(this.getApplicationContext())) {
+        try (DBUtils db = DBUtils.get(this.getApplicationContext())) {
             final List<Integer> fieldsId = Arrays.asList(
                     R.id.fieldTaskName,
                     R.id.fieldTaskEnd,
@@ -100,14 +100,21 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     }
 
     private boolean isDeadlineCorrect(String deadline) {
-        String[] split = deadline.split("/");
+        final String[] split = deadline.split("/");
         if (split.length != 3) {
             return false;
         }
 
+        final int day = Integer.parseInt(split[0]);
+        final int month = Integer.parseInt(split[1]);
+
         return split[0].length() == 2
                 && split[1].length() == 2
-                && split[2].length() == 4;
+                && split[2].length() == 4
+                && day > 0
+                && day <= 31
+                && month > 0
+                && month <= 12;
     }
 
     @Override
