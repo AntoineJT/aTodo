@@ -3,7 +3,6 @@ package com.github.antoinejt.atodo.activities;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,8 +27,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         Goto.addBackButton(getSupportActionBar());
 
         final AppCompatActivity activity = this;
-        Button okayButton = findViewById(R.id.buttonOkay);
-        okayButton.setOnClickListener(listener -> {
+        findViewById(R.id.buttonCreate).setOnClickListener(listener -> {
             final boolean succeed = createTask();
             String status = succeed ? "Task saved correctly" : "Error while saving task";
             Snackbar snack = Snackbar.make(listener, status, 350);
@@ -46,20 +44,19 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
+    private EditText findEditText(int id) {
+        return (EditText) findViewById(id);
+    }
+
     private boolean createTask() {
         //TODO Verify getApplicationContext / getBaseContext
         try (DBUtils db = new DBUtils(this.getApplicationContext())) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDate = sdf.format(new Date());
 
-            EditText editTaskName = findViewById(R.id.fieldTaskName);
-            String taskName = editTaskName.getText().toString();
-
-            EditText editTaskEnd = findViewById(R.id.fieldTaskEnd);
-            String taskEnd = editTaskEnd.getText().toString();
-
-            EditText editTaskDescription = findViewById(R.id.fieldTaskDescription);
-            String taskDescription = editTaskDescription.getText().toString();
+            String taskName = findEditText(R.id.fieldTaskName).getText().toString();
+            String taskEnd = findEditText(R.id.fieldTaskEnd).getText().toString();
+            String taskDescription = findEditText(R.id.fieldTaskDescription).getText().toString();
 
             long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
 

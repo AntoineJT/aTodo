@@ -40,10 +40,12 @@
         android:text="Important (not implemented for now)" />
 
     <Button
-        android:id="@+id/buttonOkay"
+        android:id="@+id/buttonCreate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldIsTaskImportant"
-        android:text="Okay" />
+        android:backgroundTint="#33DD33"
+        android:textColor="#FFFFFF"
+        android:text="Create" />
 
 </RelativeLayout>
