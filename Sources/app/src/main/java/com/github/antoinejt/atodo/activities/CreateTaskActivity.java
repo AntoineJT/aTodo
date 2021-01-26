@@ -12,8 +12,11 @@ import com.github.antoinejt.atodo.utils.DBUtils;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
 //   I can't do anything about it, that's how Android apps are built.
@@ -29,7 +32,9 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         final AppCompatActivity activity = this;
         findViewById(R.id.buttonCreate).setOnClickListener(listener -> {
             final boolean succeed = createTask();
-            String status = succeed ? "Task saved correctly" : "Error while saving task";
+            final String status = succeed
+                    ? "Task saved correctly"
+                    : "Error while saving task (are all fields filled?)";
             Snackbar snack = Snackbar.make(listener, status, 350);
             if (succeed) {
                 snack.addCallback(new Snackbar.Callback() {
@@ -44,21 +49,34 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
-    private EditText findEditText(int id) {
-        return (EditText) findViewById(id);
+    private String getEditTextValue(int id) {
+        return ((EditText) findViewById(id)).getText().toString();
     }
 
     private boolean createTask() {
         //TODO Verify getApplicationContext / getBaseContext
         try (DBUtils db = new DBUtils(this.getApplicationContext())) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            String currentDate = sdf.format(new Date());
+            final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            final String currentDate = sdf.format(new Date());
 
-            String taskName = findEditText(R.id.fieldTaskName).getText().toString();
-            String taskEnd = findEditText(R.id.fieldTaskEnd).getText().toString();
-            String taskDescription = findEditText(R.id.fieldTaskDescription).getText().toString();
+            // TODO S'occuper de la deadline
 
-            long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
+            final List<Integer> fieldsId =
+                    Arrays.asList(R.id.fieldTaskName, R.id.fieldTaskEnd, R.id.fieldTaskDescription);
+            // order: name, end, description
+            final List<String> values = fieldsId.stream()
+                    .map(this::getEditTextValue)
+                    .collect(Collectors.toList());
+
+            if (values.stream().anyMatch(String::isEmpty)) {
+                return false;
+            }
+
+            final String taskName = values.get(0);
+            final String taskEnd = values.get(1);
+            final String taskDescription = values.get(2);
+
+            final long taskListId = db.createTaskList(taskName, currentDate, taskEnd);
 
             return taskListId != -1
                     && db.createTask(taskListId, taskName, taskDescription) != -1;
