@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class TaskItem implements Serializable {
     public final long id;
-    public final String title;
+    public final String name;
     public final String description;
     public final Date createdAt;
     public final Date deadline;
@@ -13,7 +13,7 @@ public class TaskItem implements Serializable {
 
     public TaskItem(long id, String title, String description, Date createdAt, Date deadline, boolean isFinished) {
         this.id = id;
-        this.title = title;
+        this.name = title;
         this.description = description;
         this.createdAt = createdAt;
         this.deadline = deadline;

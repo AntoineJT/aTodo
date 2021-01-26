@@ -38,7 +38,7 @@ public class EditTaskActivity extends AppCompatActivity {
             final EditText deadlineField = findEditText(R.id.fieldTaskEnd);
             final CheckBox isFinishedField = findViewById(R.id.fieldIsTaskFinished);
 
-            nameField.setText(item.title);
+            nameField.setText(item.name);
             descriptionField.setText(item.description);
             deadlineField.setText(DateFormatter.formatter.format(item.deadline));
             isFinishedField.setChecked(item.isFinished);
