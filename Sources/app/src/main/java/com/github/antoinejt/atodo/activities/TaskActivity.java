@@ -1,4 +1,4 @@
-package com.github.antoinejt.atodo;
+package com.github.antoinejt.atodo.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.antoinejt.atodo.DBUtils;
+import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
 

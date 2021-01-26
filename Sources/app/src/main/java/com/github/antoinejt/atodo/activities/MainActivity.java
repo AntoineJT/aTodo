@@ -1,4 +1,4 @@
-package com.github.antoinejt.atodo;
+package com.github.antoinejt.atodo.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

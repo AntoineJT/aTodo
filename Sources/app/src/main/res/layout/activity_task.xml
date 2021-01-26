@@ -5,7 +5,7 @@
     android:id="@+id/taskNameField"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TaskActivity">
+    tools:context=".activities.TaskActivity">
 
     <EditText
         android:id="@+id/fieldTaskName"
