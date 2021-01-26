@@ -11,6 +11,12 @@ import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+// Sonarlint java:S110 - Inheritance tree of classes should not be too deep
+//   I can't do anything about it, that's how Android apps are built.
+// Sonarlint java:S2696 - Instance methods should not write to "static" fields
+//   I want to store a reference to the latest instance, more or less
+//   like in a singleton pattern, so I must write to a static field.
+@SuppressWarnings({"java:S110", "java:S2696"})
 public class MainActivity extends AppCompatActivity {
     private static MainActivity instance;
 
@@ -21,10 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // singleton
-        if (instance == null)
-            instance = this;
+        instance = this;
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

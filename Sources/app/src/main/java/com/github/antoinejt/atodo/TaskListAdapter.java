@@ -49,11 +49,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            itemView.setOnClickListener((View view) -> {
-                Goto.changeActivity(MainActivity.getInstance(), TaskActivity.class);
-            });
-            // TextView title = getTitle();
-            // TextView shortDescription = getShortDescription();
+            itemView.setOnClickListener((View view) ->
+                    Goto.changeActivity(MainActivity.getInstance(), TaskActivity.class));
         }
 
         protected TextView getTitle() {

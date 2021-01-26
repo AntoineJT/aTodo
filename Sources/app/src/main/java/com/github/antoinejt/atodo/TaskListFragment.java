@@ -27,24 +27,18 @@ public class TaskListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_task_list, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView rv = view.findViewById(R.id.task_list);
-        DBUtils db = new DBUtils(this.getContext());
-        TaskListAdapter adapter = new TaskListAdapter(db.getTasks());
-        rv.setAdapter(adapter);
-        rv.setHasFixedSize(true);
-
-        /*
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
-         */
+        RecyclerView recyclerView = view.findViewById(R.id.task_list);
+        try (DBUtils db = new DBUtils(this.getContext())) {
+            TaskListAdapter adapter = new TaskListAdapter(db.getTasks());
+            recyclerView.setAdapter(adapter);
+            recyclerView.setHasFixedSize(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<TaskItem> genDummyTasks(int count) {

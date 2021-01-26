@@ -1,32 +1,32 @@
 package com.github.antoinejt.atodo.activities;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.github.antoinejt.atodo.utils.DBUtils;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.antoinejt.atodo.R;
+import com.github.antoinejt.atodo.utils.DBUtils;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
+// Sonarlint java:S110 - Inheritance tree of classes should not be too deep
+//   I can't do anything about it, that's how Android apps are built.
+@SuppressWarnings("java:S110")
 public class TaskActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        ActionBar actionBar = getSupportActionBar();
-        Objects.requireNonNull(actionBar);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Goto.addBackButton(getSupportActionBar());
+
         final AppCompatActivity activity = this;
         Button okayButton = findViewById(R.id.buttonOkay);
         okayButton.setOnClickListener(v -> {
