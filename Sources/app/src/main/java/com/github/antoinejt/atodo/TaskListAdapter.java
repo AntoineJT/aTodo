@@ -8,13 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.antoinejt.atodo.activities.MainActivity;
 import com.github.antoinejt.atodo.activities.EditTaskActivity;
+import com.github.antoinejt.atodo.activities.MainActivity;
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskViewHolder> {
     private final List<TaskItem> taskList;
@@ -45,12 +47,17 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         return taskList.size();
     }
 
-    static class TaskViewHolder extends RecyclerView.ViewHolder {
+    // Sonarlint java:S3655 - Optional value should only be accessed after calling isPresent()
+    //    The element must be present, else I want it to crash the app, because some
+    //    bug is present.
+    @SuppressWarnings({"java:S3655"})
+    class TaskViewHolder extends RecyclerView.ViewHolder {
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(view ->
-                    Goto.changeActivity(MainActivity.getInstance(), EditTaskActivity.class));
+                    Goto.changeActivity(MainActivity.getInstance(), EditTaskActivity.class,
+                            taskList.get(getAdapterPosition())));
         }
 
         protected TextView getTitle() {

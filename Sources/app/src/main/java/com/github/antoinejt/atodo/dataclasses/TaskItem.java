@@ -1,8 +1,9 @@
 package com.github.antoinejt.atodo.dataclasses;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TaskItem {
+public class TaskItem implements Serializable {
     public final long id;
     public final String title;
     public final String description;
