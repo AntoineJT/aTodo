@@ -13,10 +13,8 @@ import com.github.antoinejt.atodo.activities.MainActivity;
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
-import java.util.Optional;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskViewHolder> {
     private final List<TaskItem> taskList;

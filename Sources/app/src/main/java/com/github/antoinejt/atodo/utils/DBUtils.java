@@ -19,7 +19,10 @@ public class DBUtils extends SQLiteOpenHelper {
     private final SQLiteDatabase wdb;
 
     public static DBUtils get(Context context) {
-        return (instance == null) ? new DBUtils(context) : instance;
+        if (instance == null) {
+            instance = new DBUtils(context);
+        }
+        return instance;
     }
 
     private DBUtils(Context context) {
@@ -168,19 +171,4 @@ public class DBUtils extends SQLiteOpenHelper {
         cursor.close();
         return taskItems;
     }
-/*
-    public ArrayList<String> getTask() {
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Task", null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex("Task"));
-            res.moveToNext();
-        }
-        return array_list;
-    }
-*/
 }

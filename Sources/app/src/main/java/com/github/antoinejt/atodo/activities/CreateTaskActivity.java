@@ -66,7 +66,6 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     }
 
     private TaskCreationStatus createTask() {
-        //TODO Verify getApplicationContext / getBaseContext
         try (DBUtils db = DBUtils.get(this.getApplicationContext())) {
             final List<Integer> fieldsId = Arrays.asList(
                     R.id.fieldTaskName,

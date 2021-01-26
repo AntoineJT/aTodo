@@ -73,7 +73,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 final boolean succeed = db.deleteTask(item.id);
                 final String status = succeed
                         ? "Task successfully deleted!"
-                        : "Error while deleting task";
+                        : "Error while deleting task!";
 
                 final AppCompatActivity activity = this;
                 Snackbar.make(listener, status, 500).addCallback(new Snackbar.Callback() {
