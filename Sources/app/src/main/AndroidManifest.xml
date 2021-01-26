@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.ModifyTaskActivity"
+            android:name=".activities.EditTaskActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.TaskActivity"
+            android:name=".activities.CreateTaskActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.MainActivity"

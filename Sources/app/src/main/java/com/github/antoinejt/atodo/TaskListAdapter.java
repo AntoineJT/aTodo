@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.activities.MainActivity;
-import com.github.antoinejt.atodo.activities.ModifyTaskActivity;
-import com.github.antoinejt.atodo.activities.TaskActivity;
+import com.github.antoinejt.atodo.activities.EditTaskActivity;
 import com.github.antoinejt.atodo.dataclasses.TaskItem;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
@@ -51,7 +50,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             super(itemView);
 
             itemView.setOnClickListener((View view) ->
-                    Goto.changeActivity(MainActivity.getInstance(), ModifyTaskActivity.class));
+                    Goto.changeActivity(MainActivity.getInstance(), EditTaskActivity.class));
         }
 
         protected TextView getTitle() {

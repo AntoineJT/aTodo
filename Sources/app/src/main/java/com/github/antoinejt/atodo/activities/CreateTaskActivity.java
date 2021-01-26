@@ -19,11 +19,11 @@ import java.util.Locale;
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
 //   I can't do anything about it, that's how Android apps are built.
 @SuppressWarnings("java:S110")
-public class TaskActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateTaskActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.activity_create_task);
 
         Goto.addBackButton(getSupportActionBar());
 

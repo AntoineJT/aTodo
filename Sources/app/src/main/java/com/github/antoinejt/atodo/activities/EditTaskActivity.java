@@ -11,11 +11,11 @@ import com.google.android.material.snackbar.Snackbar;
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
 //   I can't do anything about it, that's how Android apps are built.
 @SuppressWarnings("java:S110")
-public class ModifyTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_task);
+        setContentView(R.layout.activity_edit_task);
 
         Goto.addBackButton(getSupportActionBar());
 
