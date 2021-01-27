@@ -23,7 +23,7 @@
     <string name="status_create_ok">Task saved correctly!</string>
     <string name="status_create_empty_fields">Error: Some fields are empty!</string>
     <string name="status_create_date_format">Error: Date format is incorrect!</string>
-    <string name="status_create_error">Error while saving the database!</string>
+    <string name="status_create_error">Error while adding task!</string>
     <!-- Update status -->
     <string name="status_update_ok">Task successfully updated!</string>
     <string name="status_update_error">Error while updating task!</string>
