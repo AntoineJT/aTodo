@@ -16,7 +16,9 @@
     <string name="is_finished_checkbox">Terminé ?</string>
     <string name="edit_button">Éditer</string>
     <string name="delete_button">Supprimer</string>
+    <!-- Images content description -->
     <string name="fab_content_description">Créer une tâche</string>
+    <string name="task_icon_content_description">Icône de liste</string>
 
     <!-- In-code used strings -->
     <!-- Create status -->
