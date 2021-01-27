@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">aTodo</string>
+    <string name="action_settings">Opciones</string>
+    <string name="task_list_fragment">Lista de Tareas</string>
+
+    <!-- Placeholder strings -->
+    <string name="task_title_placeholder">Titulo de la tarea</string>
+    <string name="task_description_placeholder">Descripción</string>
+
+    <!-- Layout strings -->
+    <string name="deadline_field">Plazo (DD/MM/YYYY)</string>
+    <string name="description_field">Descripción</string>
+    <string name="task_name_field">Titulo de tarea</string>
+    <string name="important_checkbox">Importante (no implementado por el momento)</string>
+    <string name="create_button">Crear</string>
+    <string name="is_finished_checkbox">¿Acabada?</string>
+    <string name="edit_button">Editar</string>
+    <string name="delete_button">Eliminar</string>
+    <string name="fab_content_description">Crear una tarea</string>
+
+    <!-- In-code used strings -->
+    <!-- Create status -->
+    <string name="status_create_ok">¡Tarea grabada!</string>
+    <string name="status_create_empty_fields">Error: ¡algunas casillas están vacías!</string>
+    <string name="status_create_date_format">Error: ¡El formato de la fecha no es bueno!</string>
+    <string name="status_create_error">¡Error grabando la tarea!</string>
+    <!-- Update status -->
+    <string name="status_update_ok">¡Tarea actualizada!</string>
+    <string name="status_update_error">¡Error actualizando la tarea!</string>
+    <!-- Delete status -->
+    <string name="status_delete_ok">¡Tarea eliminada!</string>
+    <string name="status_delete_error">¡Error eliminando la tarea!</string>
+</resources>
