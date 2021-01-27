@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/task_title"
             android:layout_toEndOf="@id/task_icon"
-            android:text="@string/task_short_desc_placeholder"
+            android:text="@string/task_description_placeholder"
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
             android:textStyle="italic" />

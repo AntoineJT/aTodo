@@ -29,9 +29,10 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
 
         final AppCompatActivity activity = this;
         findViewById(R.id.buttonCreate).setOnClickListener(listener -> {
-            final TaskCreationStatus status = createTask();
-            final Snackbar snack = Snackbar.make(listener, status.getStatus(), 350);
-            if (status == TaskCreationStatus.OK) {
+            final TaskCreationStatus statusCode = createTask();
+            final String status = getString(statusCode.getStatusId());
+            final Snackbar snack = Snackbar.make(listener, status, 350);
+            if (statusCode == TaskCreationStatus.OK) {
                 snack.addCallback(new Snackbar.Callback() {
                     @Override
                     public void onDismissed(Snackbar snackbar, int event) {
@@ -49,19 +50,19 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     }
 
     enum TaskCreationStatus {
-        OK("Task saved correctly!"),
-        EMPTY_FIELDS("Error: Some fields are empty!"),
-        DATE_FORMAT("Error: Date format is incorrect!"),
-        ERROR("Error while saving the database!");
+        OK(R.string.status_create_ok),
+        EMPTY_FIELDS(R.string.status_create_empty_fields),
+        DATE_FORMAT(R.string.status_create_date_format),
+        ERROR(R.string.status_create_error);
 
-        private final String status;
+        private final int statusId;
 
-        TaskCreationStatus(String status) {
-            this.status = status;
+        TaskCreationStatus(int statusId) {
+            this.statusId = statusId;
         }
 
-        public String getStatus() {
-            return status;
+        public int getStatusId() {
+            return statusId;
         }
     }
 

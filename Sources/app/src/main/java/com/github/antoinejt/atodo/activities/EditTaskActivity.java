@@ -55,9 +55,10 @@ public class EditTaskActivity extends AppCompatActivity {
                 final boolean succeed = db.updateTask(item.id, nameField.getText().toString(),
                         descriptionField.getText().toString(),
                         newDeadline, isFinishedField.isChecked());
-                final String status = succeed
-                        ? "Task successfully updated!"
-                        : "Error while updating task!";
+                final int statusCode = succeed
+                        ? R.string.status_update_ok
+                        : R.string.status_update_error;
+                final String status = getString(statusCode);
 
                 final AppCompatActivity activity = this;
                 Snackbar.make(listener, status, 500).addCallback(new Snackbar.Callback() {
@@ -71,9 +72,10 @@ public class EditTaskActivity extends AppCompatActivity {
 
             findViewById(R.id.buttonDelete).setOnClickListener(listener -> {
                 final boolean succeed = db.deleteTask(item.id);
-                final String status = succeed
-                        ? "Task successfully deleted!"
-                        : "Error while deleting task!";
+                final int statusCode = succeed
+                        ? R.string.status_delete_ok
+                        : R.string.status_delete_error;
+                final String status = getString(statusCode);
 
                 final AppCompatActivity activity = this;
                 Snackbar.make(listener, status, 500).addCallback(new Snackbar.Callback() {

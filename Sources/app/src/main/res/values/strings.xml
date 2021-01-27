@@ -1,14 +1,33 @@
 <resources>
     <string name="app_name">aTodo</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="task_list_fragment">Task list</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Placeholder strings -->
+    <string name="task_title_placeholder">Task title</string>
+    <string name="task_description_placeholder">Description</string>
 
-    <string name="task_title_placeholder">Titre tâche</string>
-    <string name="task_short_desc_placeholder">Description courte</string>
+    <!-- Layout strings -->
+    <string name="deadline_field">Deadline (DD/MM/YYYY)</string>
+    <string name="description_field">Description</string>
+    <string name="task_name_field">Task Name</string>
+    <string name="important_checkbox">Important (not implemented for now)</string>
+    <string name="create_button">Create</string>
+    <string name="is_finished_checkbox">Is finished?</string>
+    <string name="edit_button">Edit</string>
+    <string name="delete_button">Delete</string>
+    <string name="fab_content_description">Create a task</string>
+
+    <!-- In-code used strings -->
+    <!-- Create status -->
+    <string name="status_create_ok">Task saved correctly!</string>
+    <string name="status_create_empty_fields">Error: Some fields are empty!</string>
+    <string name="status_create_date_format">Error: Date format is incorrect!</string>
+    <string name="status_create_error">Error while saving the database!</string>
+    <!-- Update status -->
+    <string name="status_update_ok">Task successfully updated!</string>
+    <string name="status_update_error">Error while updating task!</string>
+    <!-- Delete status -->
+    <string name="status_delete_ok">Task successfully deleted!</string>
+    <string name="status_delete_error">Error while deleting task!</string>
 </resources>

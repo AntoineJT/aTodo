@@ -27,7 +27,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/add_task_white"
-        android:contentDescription="Create a task" />
+        android:contentDescription="@string/fab_content_description" />
 
     <include layout="@layout/content_main" />
 

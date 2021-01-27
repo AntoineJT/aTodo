@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="Task Name" />
+        android:hint="@string/task_name_field" />
 
     <EditText
         android:id="@+id/fieldTaskDescription"
@@ -22,7 +22,7 @@
         android:gravity="start|top"
         android:layout_below="@id/fieldTaskName"
         android:inputType="textMultiLine"
-        android:hint="Description" />
+        android:hint="@string/description_field" />
 
     <EditText
         android:id="@+id/fieldTaskEnd"
@@ -31,28 +31,28 @@
         android:layout_below="@id/fieldTaskDescription"
         android:ems="10"
         android:inputType="datetime"
-        android:hint="Deadline (DD/MM/YYYY)" />
+        android:hint="@string/deadline_field" />
 
     <CheckBox
         android:id="@+id/fieldIsTaskImportant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldTaskEnd"
-        android:text="Important (not implemented for now)" />
+        android:text="@string/important_checkbox" />
 
     <CheckBox
         android:id="@+id/fieldIsTaskFinished"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldIsTaskImportant"
-        android:text="Is finished?" />
+        android:text="@string/is_finished_checkbox" />
 
     <Button
         android:id="@+id/buttonEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fieldIsTaskFinished"
-        android:text="Edit" />
+        android:text="@string/edit_button" />
 
     <Button
         android:id="@+id/buttonDelete"
@@ -61,6 +61,6 @@
         android:layout_below="@id/buttonEdit"
         android:backgroundTint="@color/colorRed"
         android:textColor="@color/colorWhite"
-        android:text="Delete" />
+        android:text="@string/delete_button" />
 
 </RelativeLayout>
