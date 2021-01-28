@@ -38,10 +38,10 @@ public class EditTaskActivity extends AppCompatActivity {
             final EditText deadlineField = findEditText(R.id.fieldTaskEnd);
             final CheckBox isFinishedField = findViewById(R.id.fieldIsTaskFinished);
 
-            nameField.setText(item.name);
-            descriptionField.setText(item.description);
-            deadlineField.setText(DateFormatter.formatter.format(item.deadline));
-            isFinishedField.setChecked(item.isFinished);
+            nameField.setText(item.getName());
+            descriptionField.setText(item.getDescription());
+            deadlineField.setText(DateFormatter.formatter.format(item.getDeadline()));
+            isFinishedField.setChecked(item.isFinished());
 
             findViewById(R.id.buttonEdit).setOnClickListener(listener -> {
                 Snackbar.make(listener, "To implement", 500).show();
@@ -52,7 +52,7 @@ public class EditTaskActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                final boolean succeed = db.updateTask(item.id, nameField.getText().toString(),
+                final boolean succeed = db.updateTask(item.getId(), nameField.getText().toString(),
                         descriptionField.getText().toString(),
                         newDeadline, isFinishedField.isChecked());
                 final int statusCode = succeed
@@ -71,7 +71,7 @@ public class EditTaskActivity extends AppCompatActivity {
             });
 
             findViewById(R.id.buttonDelete).setOnClickListener(listener -> {
-                final boolean succeed = db.deleteTask(item.id);
+                final boolean succeed = db.deleteTask(item.getId());
                 final int statusCode = succeed
                         ? R.string.status_delete_ok
                         : R.string.status_delete_error;

@@ -36,8 +36,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         Preconditions.requiresUnsigned(position);
         TaskItem item = taskList.get(position);
 
-        holder.getTitle().setText(item.name);
-        holder.getDescription().setText(item.description);
+        holder.getTitle().setText(item.getName());
+        holder.getDescription().setText(item.getDescription());
     }
 
     @Override
