@@ -18,7 +18,7 @@
     <string name="delete_button">Eliminar</string>
     <!-- Images content description -->
     <string name="fab_content_description">Crear una tarea</string>
-    <string name="task_icon_content_description">List icon</string>
+    <string name="task_icon_content_description">Lista de íconos</string>
 
     <!-- In-code used strings -->
     <!-- Create status -->
