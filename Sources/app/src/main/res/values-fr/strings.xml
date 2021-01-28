@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">aTodo</string>
-    <string name="action_settings">Settings</string>
-    <string name="task_list_fragment">Task list</string>
 
     <!-- Placeholder strings -->
     <string name="task_title_placeholder">Titre de la tâche</string>
     <string name="task_description_placeholder">Description</string>
 
     <!-- Layout strings -->
+    <string name="action_settings">Options</string>
+    <string name="task_list_fragment">Liste de tâches</string>
     <string name="deadline_field">Date butoir (JJ/MM/AAAA)</string>
     <string name="description_field">Description</string>
     <string name="task_name_field">Nom de la tâche</string>

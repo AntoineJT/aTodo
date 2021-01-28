@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">aTodo</string>
-    <string name="action_settings">Opciones</string>
-    <string name="task_list_fragment">Lista de Tareas</string>
 
     <!-- Placeholder strings -->
     <string name="task_title_placeholder">Titulo de la tarea</string>
     <string name="task_description_placeholder">Descripción</string>
 
     <!-- Layout strings -->
+    <string name="action_settings">Opciones</string>
+    <string name="task_list_fragment">Lista de Tareas</string>
     <string name="deadline_field">Plazo (DD/MM/YYYY)</string>
     <string name="description_field">Descripción</string>
     <string name="task_name_field">Titulo de tarea</string>
@@ -16,7 +16,9 @@
     <string name="is_finished_checkbox">¿Acabada?</string>
     <string name="edit_button">Editar</string>
     <string name="delete_button">Eliminar</string>
+    <!-- Images content description -->
     <string name="fab_content_description">Crear una tarea</string>
+    <string name="task_icon_content_description">List icon</string>
 
     <!-- In-code used strings -->
     <!-- Create status -->
