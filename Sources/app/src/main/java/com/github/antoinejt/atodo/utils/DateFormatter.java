@@ -1,7 +1,6 @@
 package com.github.antoinejt.atodo.utils;
 
-import android.icu.text.SimpleDateFormat;
-
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class DateFormatter {
@@ -9,6 +8,9 @@ public class DateFormatter {
         // hides default ctor
     }
 
-    public static final SimpleDateFormat formatter =
-            new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    private static final String DATE_PATTERN = "dd/MM/yyyy";
+
+    public static final SimpleDateFormat newFormatter() {
+        return new SimpleDateFormat(DATE_PATTERN, Locale.getDefault());
+    }
 }

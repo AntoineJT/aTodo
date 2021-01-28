@@ -14,6 +14,7 @@ import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
@@ -37,17 +38,18 @@ public class EditTaskActivity extends AppCompatActivity {
             final EditText descriptionField = findEditText(R.id.fieldTaskDescription);
             final EditText deadlineField = findEditText(R.id.fieldTaskEnd);
             final CheckBox isFinishedField = findViewById(R.id.fieldIsTaskFinished);
+            final SimpleDateFormat formatter = DateFormatter.newFormatter();
 
             nameField.setText(item.getName());
             descriptionField.setText(item.getDescription());
-            deadlineField.setText(DateFormatter.formatter.format(item.getDeadline()));
+            deadlineField.setText(formatter.format(item.getDeadline()));
             isFinishedField.setChecked(item.isFinished());
 
             findViewById(R.id.buttonEdit).setOnClickListener(listener -> {
                 Snackbar.make(listener, "To implement", 500).show();
                 Date newDeadline = null;
                 try {
-                    newDeadline = DateFormatter.formatter.parse(deadlineField.getText().toString());
+                    newDeadline = formatter.parse(deadlineField.getText().toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

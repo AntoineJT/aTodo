@@ -89,7 +89,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
                 return TaskCreationStatus.DATE_FORMAT;
             }
 
-            final boolean succeed = db.createTask(name, description, DateFormatter.formatter.parse(deadline)) != -1;
+            final boolean succeed = db.createTask(name, description, DateFormatter.newFormatter().parse(deadline)) != -1;
 
             return succeed ? TaskCreationStatus.OK : TaskCreationStatus.ERROR;
         } catch (Exception e) {
