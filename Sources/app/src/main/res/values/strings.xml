@@ -4,6 +4,7 @@
     <!-- Placeholder strings -->
     <string name="task_title_placeholder">Task title</string>
     <string name="task_description_placeholder">Description</string>
+    <string name="task_deadline_placeholder">Deadline</string>
 
     <!-- Layout strings -->
     <string name="action_settings">Settings</string>

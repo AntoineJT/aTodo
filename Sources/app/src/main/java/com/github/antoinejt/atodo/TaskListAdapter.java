@@ -38,6 +38,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         holder.getTitle().setText(item.getName());
         holder.getDescription().setText(item.getDescription());
+        holder.getDeadline().setText(item.getFormattedDeadline());
     }
 
     @Override
@@ -64,6 +65,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
         protected TextView getDescription() {
             return itemView.findViewById(R.id.task_desc);
+        }
+
+        protected TextView getDeadline() {
+            return itemView.findViewById(R.id.task_deadline);
         }
     }
 }

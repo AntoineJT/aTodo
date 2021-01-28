@@ -1,5 +1,7 @@
 package com.github.antoinejt.atodo.models;
 
+import com.github.antoinejt.atodo.utils.DateFormatter;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,6 +40,10 @@ public class TaskItem implements Serializable {
 
     public Date getDeadline() {
         return deadline;
+    }
+
+    public String getFormattedDeadline() {
+        return DateFormatter.format(deadline);
     }
 
     public boolean isFinished() {

@@ -32,4 +32,5 @@
     <!-- Delete status -->
     <string name="status_delete_ok">¡Tarea eliminada!</string>
     <string name="status_delete_error">¡Error eliminando la tarea!</string>
+    <string name="task_deadline_placeholder">Deadline</string>
 </resources>

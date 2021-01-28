@@ -32,4 +32,5 @@
     <!-- Delete status -->
     <string name="status_delete_ok">Tâche correctement supprimée !</string>
     <string name="status_delete_error">Erreur durant la suppression de la tâche !</string>
+    <string name="task_deadline_placeholder">Date butoir</string>
 </resources>
