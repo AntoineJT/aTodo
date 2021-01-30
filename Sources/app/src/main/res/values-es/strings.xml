@@ -18,11 +18,10 @@
     <string name="delete_button">Eliminar</string>
     <!-- Lang things -->
     <string name="selected_lang">Idioma actual : Español</string>
-    <!-- TODO Translate that -->
-    <string name="lang_en">English</string>
-    <string name="lang_fr">Français</string>
+    <string name="lang_en">Ingles</string>
+    <string name="lang_fr">Frances</string>
     <string name="lang_es">Español</string>
-    <string name="lang_switch_label">Switch language</string>
+    <string name="lang_switch_label">Cambiar de idioma</string>
     <!-- Images content description -->
     <string name="fab_content_description">Crear una tarea</string>
     <string name="task_icon_content_description">Lista de íconos</string>
@@ -39,5 +38,5 @@
     <!-- Delete status -->
     <string name="status_delete_ok">¡Tarea eliminada!</string>
     <string name="status_delete_error">¡Error eliminando la tarea!</string>
-    <string name="task_deadline_placeholder">Deadline</string>
+    <string name="task_deadline_placeholder">Plazo</string>
 </resources>
