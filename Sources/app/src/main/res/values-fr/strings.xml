@@ -6,7 +6,6 @@
     <string name="task_description_placeholder">Description</string>
 
     <!-- Layout strings -->
-    <string name="selected_lang">Langue actuelle : Français</string>
     <string name="action_settings">Options</string>
     <string name="task_list_fragment">Liste de tâches</string>
     <string name="deadline_field">Date butoir (JJ/MM/AAAA)</string>
@@ -17,6 +16,12 @@
     <string name="is_finished_checkbox">Terminé ?</string>
     <string name="edit_button">Éditer</string>
     <string name="delete_button">Supprimer</string>
+    <!-- Lang things -->
+    <string name="selected_lang">Langue actuelle : Français</string>
+    <string name="lang_en">Anglais</string>
+    <string name="lang_fr">Français</string>
+    <string name="lang_es">Espagnol</string>
+    <string name="lang_switch_label">Changer de langue</string>
     <!-- Images content description -->
     <string name="fab_content_description">Créer une tâche</string>
     <string name="task_icon_content_description">Icône de liste</string>
