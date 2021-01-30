@@ -60,7 +60,7 @@
         tools:layout_constraintRight_creator="1" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/selected_lang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
