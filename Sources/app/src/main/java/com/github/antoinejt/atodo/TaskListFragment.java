@@ -35,7 +35,7 @@ public class TaskListFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.task_list);
         try (DatabaseHandler db = DatabaseHandler.get(this.getContext())) {
-            TaskListAdapter adapter = new TaskListAdapter(db.getTasks());
+            TaskListAdapter adapter = new TaskListAdapter(db.getTasksByEndDate());
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
         } catch (Exception e) {

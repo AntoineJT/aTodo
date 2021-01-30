@@ -151,9 +151,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getInt(cursor.getColumnIndex(field));
     }
 
-    public List<TaskItem> getTasks() {
+    private List<TaskItem> getTasks(String queryEnd) {
         // wdb.query("Task", new String[] { "taskName", "taskDescription" }, null, null, null, null, null);
-        Cursor cursor = wdb.rawQuery("SELECT * from Task", null);
+        Cursor cursor = wdb.rawQuery("SELECT * from Task " + queryEnd, null);
         cursor.moveToFirst();
 
         List<TaskItem> taskItems = new ArrayList<>();
@@ -170,5 +170,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         return taskItems;
+    }
+
+    public List<TaskItem> getTasksByEndDate() {
+        return getTasks("ORDER BY taskEnds ASC");
     }
 }
