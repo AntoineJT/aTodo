@@ -6,6 +6,7 @@
     <string name="task_description_placeholder">Descripción</string>
 
     <!-- Layout strings -->
+    <string name="selected_lang">Idioma actual : Español</string>
     <string name="action_settings">Opciones</string>
     <string name="task_list_fragment">Lista de Tareas</string>
     <string name="deadline_field">Plazo (DD/MM/YYYY)</string>

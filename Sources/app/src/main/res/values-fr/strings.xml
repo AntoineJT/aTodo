@@ -6,6 +6,7 @@
     <string name="task_description_placeholder">Description</string>
 
     <!-- Layout strings -->
+    <string name="selected_lang">Langue actuelle : Français</string>
     <string name="action_settings">Options</string>
     <string name="task_list_fragment">Liste de tâches</string>
     <string name="deadline_field">Date butoir (JJ/MM/AAAA)</string>
