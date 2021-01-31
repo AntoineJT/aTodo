@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.antoinejt.atodo.activities.EditTaskActivity;
 import com.github.antoinejt.atodo.activities.MainActivity;
 import com.github.antoinejt.atodo.models.TaskItem;
-import com.github.antoinejt.atodo.utils.Goto;
+import com.github.antoinejt.atodo.utils.ActivityHelper;
 import com.github.antoinejt.exassert.Preconditions;
 
 import java.util.Date;
@@ -80,7 +80,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             super(itemView);
 
             itemView.setOnClickListener(view ->
-                    Goto.changeActivity(MainActivity.getInstance(), EditTaskActivity.class,
+                    ActivityHelper.changeActivity(MainActivity.getInstance(), EditTaskActivity.class,
                             taskList.get(getAdapterPosition())));
         }
 

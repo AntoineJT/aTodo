@@ -10,7 +10,7 @@ import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.models.TaskItem;
 import com.github.antoinejt.atodo.utils.DatabaseHandler;
 import com.github.antoinejt.atodo.utils.DateFormatter;
-import com.github.antoinejt.atodo.utils.Goto;
+import com.github.antoinejt.atodo.utils.ActivityHelper;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
@@ -30,7 +30,7 @@ public class EditTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
-        Goto.addBackButton(getSupportActionBar());
+        ActivityHelper.addBackButton(getSupportActionBar());
 
         final TaskItem item = (TaskItem) getIntent().getSerializableExtra("taskData");
         try (DatabaseHandler db = DatabaseHandler.get(this.getApplicationContext())) {
@@ -67,7 +67,7 @@ public class EditTaskActivity extends AppCompatActivity {
                     @Override
                     public void onDismissed(Snackbar snackbar, int event) {
                         super.onDismissed(snackbar, event);
-                        Goto.changeActivity(activity, MainActivity.class);
+                        ActivityHelper.changeActivity(activity, MainActivity.class);
                     }
                 }).show();
             });
@@ -84,7 +84,7 @@ public class EditTaskActivity extends AppCompatActivity {
                     @Override
                     public void onDismissed(Snackbar snackbar, int event) {
                         super.onDismissed(snackbar, event);
-                        Goto.changeActivity(activity, MainActivity.class);
+                        ActivityHelper.changeActivity(activity, MainActivity.class);
                     }
                 }).show();
             });

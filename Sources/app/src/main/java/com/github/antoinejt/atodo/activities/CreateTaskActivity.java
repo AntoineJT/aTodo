@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.DatabaseHandler;
 import com.github.antoinejt.atodo.utils.DateFormatter;
-import com.github.antoinejt.atodo.utils.Goto;
+import com.github.antoinejt.atodo.utils.ActivityHelper;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 
-        Goto.addBackButton(getSupportActionBar());
+        ActivityHelper.addBackButton(getSupportActionBar());
 
         final AppCompatActivity activity = this;
         findViewById(R.id.buttonCreate).setOnClickListener(listener -> {
@@ -37,7 +37,7 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onDismissed(Snackbar snackbar, int event) {
                         super.onDismissed(snackbar, event);
-                        Goto.changeActivity(activity, MainActivity.class);
+                        ActivityHelper.changeActivity(activity, MainActivity.class);
                     }
                 });
             }

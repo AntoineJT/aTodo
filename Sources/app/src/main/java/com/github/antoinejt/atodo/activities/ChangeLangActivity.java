@@ -6,7 +6,7 @@ import android.widget.RadioGroup;
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.BiMap;
-import com.github.antoinejt.atodo.utils.Goto;
+import com.github.antoinejt.atodo.utils.ActivityHelper;
 
 import java.util.Locale;
 
@@ -37,7 +37,7 @@ public class ChangeLangActivity extends LocalizationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
 
-        Goto.addBackButton(getSupportActionBar());
+        ActivityHelper.addBackButton(getSupportActionBar());
 
         final RadioGroup rg = findViewById(R.id.selected_lang);
 

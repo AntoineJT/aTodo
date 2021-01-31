@@ -10,8 +10,8 @@ import com.github.antoinejt.atodo.models.TaskItem;
 
 import java.util.Objects;
 
-public class Goto {
-    private Goto() {
+public class ActivityHelper {
+    private ActivityHelper() {
         // hide the default ctor
     }
 

@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.TaskListFragment;
-import com.github.antoinejt.atodo.utils.Goto;
+import com.github.antoinejt.atodo.utils.ActivityHelper;
 import com.github.antoinejt.atodo.utils.Preferences;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -52,7 +52,7 @@ public class MainActivity extends LocalizationActivity {
         setSupportActionBar(toolbar);
 
         final FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Goto.changeActivity(this, CreateTaskActivity.class));
+        fab.setOnClickListener(view -> ActivityHelper.changeActivity(this, CreateTaskActivity.class));
 
         final Switch hideUnfinished = findViewById(R.id.hide_switch);
         hideUnfinishedTasks |= TaskListFragment.isHidingUnfinishedTasks();
@@ -61,7 +61,7 @@ public class MainActivity extends LocalizationActivity {
             if (TaskListFragment.isHidingUnfinishedTasks() != isChecked) {
                 TaskListFragment.setHideUnfinishedTasks(isChecked);
                 Preferences.saveBoolean(getApplicationContext(), HIDE_TASKS_PREFERENCES, isChecked);
-                Goto.refresh(instance);
+                ActivityHelper.refresh(instance);
             }
         });
     }
@@ -81,7 +81,7 @@ public class MainActivity extends LocalizationActivity {
         final int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Goto.changeActivity(this, ChangeLangActivity.class);
+            ActivityHelper.changeActivity(this, ChangeLangActivity.class);
         }
 
         return super.onOptionsItemSelected(item);
