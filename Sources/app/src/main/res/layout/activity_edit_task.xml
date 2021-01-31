@@ -39,17 +39,10 @@
             android:importantForAutofill="no" />
 
         <CheckBox
-            android:id="@+id/fieldIsTaskImportant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fieldTaskEnd"
-            android:text="@string/important_checkbox" />
-
-        <CheckBox
             android:id="@+id/fieldIsTaskFinished"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fieldIsTaskImportant"
+            android:layout_below="@id/fieldTaskEnd"
             android:text="@string/is_finished_checkbox" />
 
         <Button

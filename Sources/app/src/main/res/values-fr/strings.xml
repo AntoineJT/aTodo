@@ -11,7 +11,6 @@
     <string name="deadline_field">Date butoir (JJ/MM/AAAA)</string>
     <string name="description_field">Description</string>
     <string name="task_name_field">Nom de la tâche</string>
-    <string name="important_checkbox">Important (pas implémenté pour le moment)</string>
     <string name="create_button">Créer</string>
     <string name="is_finished_checkbox">Terminé ?</string>
     <string name="edit_button">Éditer</string>

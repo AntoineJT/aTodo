@@ -37,18 +37,11 @@
             android:hint="@string/deadline_field"
             android:importantForAutofill="no" />
 
-        <CheckBox
-            android:id="@+id/fieldIsTaskImportant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fieldTaskEnd"
-            android:text="@string/important_checkbox" />
-
         <Button
             android:id="@+id/buttonCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fieldIsTaskImportant"
+            android:layout_below="@id/fieldTaskEnd"
             android:backgroundTint="@color/colorGreen"
             android:textColor="@color/colorWhite"
             android:text="@string/create_button" />

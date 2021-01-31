@@ -11,7 +11,6 @@
     <string name="deadline_field">Plazo (DD/MM/YYYY)</string>
     <string name="description_field">Descripción</string>
     <string name="task_name_field">Titulo de tarea</string>
-    <string name="important_checkbox">Importante (no implementado por el momento)</string>
     <string name="create_button">Crear</string>
     <string name="is_finished_checkbox">¿Acabada?</string>
     <string name="edit_button">Editar</string>
