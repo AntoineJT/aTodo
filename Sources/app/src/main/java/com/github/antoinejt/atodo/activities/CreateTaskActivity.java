@@ -1,47 +1,41 @@
 package com.github.antoinejt.atodo.activities;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.antoinejt.atodo.DatePickerListener;
 import com.github.antoinejt.atodo.R;
+import com.github.antoinejt.atodo.utils.ActivityHelper;
 import com.github.antoinejt.atodo.utils.DatabaseHandler;
 import com.github.antoinejt.atodo.utils.DateFormatter;
-import com.github.antoinejt.atodo.utils.ActivityHelper;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.Calendar;
 
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
 //   I can't do anything about it, that's how Android apps are built.
 @SuppressWarnings("java:S110")
-public class CreateTaskActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
-    private TextView dateText;
-
+public class CreateTaskActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
-        dateText = findViewById(R.id.fieldTaskEnd);
 
-        findViewById(R.id.fieldTaskEnd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        final AppCompatActivity activity = this;
+
+        final TextView dateText = findViewById(R.id.fieldTaskEnd);
+        final DatePickerListener datePickerListener = new DatePickerListener(dateText);
+        findViewById(R.id.fieldTaskEnd).setOnClickListener(v ->
+                ActivityHelper.showDatePickerDialog(activity, datePickerListener));
 
         ActivityHelper.addBackButton(getSupportActionBar());
 
-        final AppCompatActivity activity = this;
         findViewById(R.id.buttonCreate).setOnClickListener(listener -> {
             final TaskCreationStatus statusCode = createTask();
             final String status = getString(statusCode.getStatusId());
@@ -132,31 +126,5 @@ public class CreateTaskActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         // we don't care of this event
-    }
-
-    public void showDatePickerDialog(){
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String fDay, fMonth;
-        month++;
-        if(dayOfMonth<10)
-            fDay = "0" + dayOfMonth;
-        else
-            fDay=""+dayOfMonth; ;
-        if(month<10)
-            fMonth = "0" + month;
-        else
-            fMonth = ""+month;
-        String date = fDay +"/"+fMonth+"/"+year;
-        dateText.setText(date);
     }
 }

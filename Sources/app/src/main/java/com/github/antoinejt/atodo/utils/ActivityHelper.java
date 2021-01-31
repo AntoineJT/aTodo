@@ -1,6 +1,8 @@
 package com.github.antoinejt.atodo.utils;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.appcompat.app.ActionBar;
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.antoinejt.atodo.models.TaskItem;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class ActivityHelper {
@@ -36,5 +39,16 @@ public class ActivityHelper {
         activity.finish();
         activity.startActivity(activity.getIntent());
         activity.overridePendingTransition(0, 0);
+    }
+
+    public static void showDatePickerDialog(Context context, DatePickerDialog.OnDateSetListener listener) {
+        final Calendar calendar = Calendar.getInstance();
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                context,
+                listener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 }
