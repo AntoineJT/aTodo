@@ -6,12 +6,12 @@ import android.view.MenuItem;
 import android.widget.Switch;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.TaskListFragment;
 import com.github.antoinejt.atodo.utils.Goto;
+import com.github.antoinejt.atodo.utils.Preferences;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
@@ -24,7 +24,9 @@ import java.util.Locale;
 @SuppressWarnings({"java:S110", "java:S2696"})
 public class MainActivity extends LocalizationActivity {
     private static MainActivity instance;
-    private static boolean hasSetLanguage = false;
+    private static boolean firstRun = false;
+
+    private static final String HIDE_TASKS_PREFERENCES = "PrefersToHideTasks";
 
     public static MainActivity getInstance() {
         return instance;
@@ -35,10 +37,14 @@ public class MainActivity extends LocalizationActivity {
         super.onCreate(savedInstanceState);
         instance = this;
 
+        boolean hideUnfinishedTasks = Preferences.getBoolean(getApplicationContext(),
+                HIDE_TASKS_PREFERENCES, false);
+
         // set last selected language only at startup
-        if (!hasSetLanguage) {
+        if (!firstRun) {
             setLanguage(Locale.getDefault());
-            hasSetLanguage = true;
+            TaskListFragment.setHideUnfinishedTasks(hideUnfinishedTasks);
+            firstRun = true;
         }
 
         setContentView(R.layout.activity_main);
@@ -48,11 +54,13 @@ public class MainActivity extends LocalizationActivity {
         final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Goto.changeActivity(this, CreateTaskActivity.class));
 
-        Switch hideUnfinished = findViewById(R.id.hide_switch);
-        hideUnfinished.setChecked(TaskListFragment.isHidingUnfinishedTasks());
+        final Switch hideUnfinished = findViewById(R.id.hide_switch);
+        hideUnfinishedTasks |= TaskListFragment.isHidingUnfinishedTasks();
+        hideUnfinished.setChecked(hideUnfinishedTasks);
         hideUnfinished.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (TaskListFragment.isHidingUnfinishedTasks() != isChecked) {
                 TaskListFragment.setHideUnfinishedTasks(isChecked);
+                Preferences.saveBoolean(getApplicationContext(), HIDE_TASKS_PREFERENCES, isChecked);
                 Goto.refresh(instance);
             }
         });
