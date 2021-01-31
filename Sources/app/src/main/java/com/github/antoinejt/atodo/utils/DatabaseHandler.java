@@ -76,29 +76,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return wdb.insert("Task", null, contentValues);
     }
 
-    public long createCategory(String categoryName, String categoryDescription) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("categoryName", categoryName);
-        contentValues.put("categoryDescription", categoryDescription);
-        return wdb.insert("Category", null, contentValues);
-    }
-
-    public long createAlert(String alertsAt) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("alertsAt", alertsAt);
-        return wdb.insert("Alert", null, contentValues);
-    }
-
-    public boolean deleteCategory(long id) {
-        Preconditions.requiresUnsigned(id);
-        return wdb.delete("Category", "categoryId = ? ", new String[]{Long.toString(id)}) == 1;
-    }
-
-    public boolean deleteAlert(long id) {
-        Preconditions.requiresUnsigned(id);
-        return wdb.delete("Alert", "alertId = ? ", new String[]{Long.toString(id)}) == 1;
-    }
-
     public boolean deleteTask(long id) {
         Preconditions.requiresUnsigned(id);
         return wdb.delete("Task", "taskId = ? ", new String[]{Long.toString(id)}) == 1;
@@ -114,25 +91,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put("taskFinished", finished ? 1 : 0);
 
         return wdb.update("Task", contentValues, "taskId = ?", new String[]{Long.toString(id)}) == 1;
-    }
-
-    public boolean updateCategory(long id, String categoryName, String categoryDescription) {
-        Preconditions.requiresUnsigned(id);
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("categoryName", categoryName);
-        contentValues.put("categoryDescription", categoryDescription);
-
-        return wdb.update("Category", contentValues, "categoryId = ? ", new String[]{Long.toString(id)}) == 1;
-    }
-
-    public boolean updateAlert(long id, String alertsAt) {
-        Preconditions.requiresUnsigned(id);
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("alertsAt", alertsAt);
-
-        return wdb.update("Alert", contentValues, "alertId = ? ", new String[]{Long.toString(id)}) == 1;
     }
 
     private long asLong(Cursor cursor, String field) {
@@ -152,7 +110,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     private List<TaskItem> getTasks(String queryEnd) {
-        // wdb.query("Task", new String[] { "taskName", "taskDescription" }, null, null, null, null, null);
         Cursor cursor = wdb.rawQuery("SELECT * from Task " + queryEnd, null);
         cursor.moveToFirst();
 
@@ -179,4 +136,48 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<TaskItem> getUnfinishedTasks() {
         return getTasks("WHERE taskFinished = 0 ORDER BY taskEnds ASC");
     }
+
+    /*
+    public long createCategory(String categoryName, String categoryDescription) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("categoryName", categoryName);
+        contentValues.put("categoryDescription", categoryDescription);
+        return wdb.insert("Category", null, contentValues);
+    }
+
+    public long createAlert(String alertsAt) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("alertsAt", alertsAt);
+        return wdb.insert("Alert", null, contentValues);
+    }
+
+    public boolean deleteCategory(long id) {
+        Preconditions.requiresUnsigned(id);
+        return wdb.delete("Category", "categoryId = ? ", new String[]{Long.toString(id)}) == 1;
+    }
+
+    public boolean deleteAlert(long id) {
+        Preconditions.requiresUnsigned(id);
+        return wdb.delete("Alert", "alertId = ? ", new String[]{Long.toString(id)}) == 1;
+    }
+
+    public boolean updateCategory(long id, String categoryName, String categoryDescription) {
+        Preconditions.requiresUnsigned(id);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("categoryName", categoryName);
+        contentValues.put("categoryDescription", categoryDescription);
+
+        return wdb.update("Category", contentValues, "categoryId = ? ", new String[]{Long.toString(id)}) == 1;
+    }
+
+    public boolean updateAlert(long id, String alertsAt) {
+        Preconditions.requiresUnsigned(id);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("alertsAt", alertsAt);
+
+        return wdb.update("Alert", contentValues, "alertId = ? ", new String[]{Long.toString(id)}) == 1;
+    }
+    */
 }
