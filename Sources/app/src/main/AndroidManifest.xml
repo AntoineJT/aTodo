@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.ChangeLangActivity"
-            android:parentActivityName=".activities.MainActivity"
-            />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.EditTaskActivity"
             android:parentActivityName=".activities.MainActivity" />
