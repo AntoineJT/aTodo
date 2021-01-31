@@ -19,6 +19,15 @@ import java.util.Date;
 import java.util.List;
 
 public class TaskListFragment extends Fragment {
+    private static boolean hideUnfinishedTasks = false;
+
+    public static boolean isHidingUnfinishedTasks() {
+        return hideUnfinishedTasks;
+    }
+
+    public static void setHideUnfinishedTasks(boolean hideUnfinishedTasks) {
+        TaskListFragment.hideUnfinishedTasks = hideUnfinishedTasks;
+    }
 
     @Override
     public View onCreateView(
@@ -35,7 +44,9 @@ public class TaskListFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.task_list);
         try (DatabaseHandler db = DatabaseHandler.get(this.getContext())) {
-            TaskListAdapter adapter = new TaskListAdapter(db.getTasksByEndDate());
+            final List<TaskItem> items = hideUnfinishedTasks
+                    ? db.getUnfinishedTasks() : db.getTasks();
+            final TaskListAdapter adapter = new TaskListAdapter(items);
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
         } catch (Exception e) {

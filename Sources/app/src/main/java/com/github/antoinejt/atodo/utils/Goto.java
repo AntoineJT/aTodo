@@ -30,4 +30,11 @@ public class Goto {
         Objects.requireNonNull(actionBar);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
+
+    public static void refresh(AppCompatActivity activity) {
+        // refresh with a white screen, not a black one like with recreate
+        activity.finish();
+        activity.startActivity(activity.getIntent());
+        activity.overridePendingTransition(0, 0);
+    }
 }

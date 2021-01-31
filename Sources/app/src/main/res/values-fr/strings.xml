@@ -7,6 +7,7 @@
 
     <!-- Layout strings -->
     <string name="action_settings">Options</string>
+    <string name="hide_switch">Cacher les tâches terminées</string>
     <string name="task_list_fragment">Liste de tâches</string>
     <string name="deadline_field">Date butoir (JJ/MM/AAAA)</string>
     <string name="description_field">Description</string>

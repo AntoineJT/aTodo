@@ -3,11 +3,14 @@ package com.github.antoinejt.atodo.activities;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Switch;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.github.antoinejt.atodo.R;
+import com.github.antoinejt.atodo.TaskListFragment;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,11 +42,20 @@ public class MainActivity extends LocalizationActivity {
         }
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Goto.changeActivity(this, CreateTaskActivity.class));
+
+        Switch hideUnfinished = findViewById(R.id.hide_switch);
+        hideUnfinished.setChecked(TaskListFragment.isHidingUnfinishedTasks());
+        hideUnfinished.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (TaskListFragment.isHidingUnfinishedTasks() != isChecked) {
+                TaskListFragment.setHideUnfinishedTasks(isChecked);
+                Goto.refresh(instance);
+            }
+        });
     }
 
     @Override

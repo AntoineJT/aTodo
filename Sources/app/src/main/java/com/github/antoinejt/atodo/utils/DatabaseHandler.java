@@ -172,7 +172,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return taskItems;
     }
 
-    public List<TaskItem> getTasksByEndDate() {
+    public List<TaskItem> getTasks() {
         return getTasks("ORDER BY taskEnds ASC");
+    }
+
+    public List<TaskItem> getUnfinishedTasks() {
+        return getTasks("WHERE taskFinished = 0 ORDER BY taskEnds ASC");
     }
 }
