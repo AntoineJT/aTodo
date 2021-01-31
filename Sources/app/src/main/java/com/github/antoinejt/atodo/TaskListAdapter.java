@@ -1,11 +1,13 @@
 package com.github.antoinejt.atodo;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.antoinejt.atodo.activities.EditTaskActivity;
@@ -14,6 +16,7 @@ import com.github.antoinejt.atodo.models.TaskItem;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.github.antoinejt.exassert.Preconditions;
 
+import java.util.Date;
 import java.util.List;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskViewHolder> {
@@ -21,6 +24,19 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
     public TaskListAdapter(List<TaskItem> taskList) {
         this.taskList = taskList;
+    }
+
+    private static final int NO_COLOR = 0;
+
+    private static int getColorId(TaskItem item) {
+        if (item.isFinished())
+            return R.color.colorTaskFinished;
+
+        final Date deadline = item.getDeadline();
+        final Date now = new Date();
+        if (deadline.before(now))
+            return R.color.colorTaskExceeded;
+        return NO_COLOR;
     }
 
     @NonNull
@@ -39,6 +55,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         holder.getTitle().setText(item.getName());
         holder.getDescription().setText(item.getDescription());
         holder.getDeadline().setText(item.getFormattedDeadline());
+
+        final int colorId = getColorId(item);
+        if (colorId != NO_COLOR) {
+            final int color = ContextCompat.getColor(holder.itemView.getContext(), colorId);
+            holder.itemView.setBackgroundColor(color);
+
+            holder.getDescription().setTextColor(Color.WHITE);
+            holder.getDeadline().setTextColor(Color.WHITE);
+        }
     }
 
     @Override

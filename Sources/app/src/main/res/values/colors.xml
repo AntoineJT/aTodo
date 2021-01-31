@@ -6,4 +6,7 @@
     <color name="colorGreen">#33DD33</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRed">#DD3333</color>
+    <color name="colorGray">#808080</color>
+    <color name="colorTaskFinished">#bfbfbf</color>
+    <color name="colorTaskExceeded">#ff8080</color>
 </resources>
