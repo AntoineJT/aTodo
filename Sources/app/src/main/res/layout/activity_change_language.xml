@@ -1,103 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.github.antoinejt.atodo.activities.ChangeLangActivity">
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.github.antoinejt.atodo.activities.ChangeLangActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/selected_lang"
-        android:textSize="20sp"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/english_lang"
-        android:layout_width="wrap_content"
-        android:layout_height="29dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="57dp"
-        android:text="@string/lang_en"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <TextView
-        android:id="@+id/spanish_lang"
-        android:layout_width="wrap_content"
-        android:layout_height="29dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="17dp"
-        android:text="@string/lang_es"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/english_lang"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <TextView
-        android:id="@+id/french_lang"
-        android:layout_width="0dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="19dp"
-        android:text="@string/lang_fr"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spanish_lang"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <RadioGroup
-        android:id="@+id/selected_lang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        <RadioButton
-            android:id="@+id/radio_en"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/selected_lang"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/english_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/lang_en"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1" />
+
+        <TextView
+            android:id="@+id/spanish_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="17dp"
+            android:text="@string/lang_es"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/english_lang"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1" />
+
+        <TextView
+            android:id="@+id/french_lang"
+            android:layout_width="0dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="19dp"
+            android:text="@string/lang_fr"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spanish_lang"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1" />
+
+        <RadioGroup
+            android:id="@+id/selected_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="150dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+            <RadioButton
+                android:id="@+id/radio_en"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <RadioButton
+                android:id="@+id/radio_es"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radio_en" />
+
+            <RadioButton
+                android:id="@+id/radio_fr"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radio_es" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnChangeLangView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="185dp"
+            android:text="@string/lang_switch_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <RadioButton
-            android:id="@+id/radio_es"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radio_en" />
-
-        <RadioButton
-            android:id="@+id/radio_fr"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radio_es" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btnChangeLangView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
-        android:text="@string/lang_switch_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

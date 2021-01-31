@@ -1,69 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/taskNameField"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.EditTaskActivity">
-
-    <EditText
-        android:id="@+id/fieldTaskName"
+    android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/taskNameField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/task_name_field"
-        android:importantForAutofill="no" />
+        android:layout_height="match_parent"
+        tools:context=".activities.EditTaskActivity">
 
-    <EditText
-        android:id="@+id/fieldTaskDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:layout_below="@id/fieldTaskName"
-        android:inputType="textMultiLine"
-        android:hint="@string/description_field"
-        android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/fieldTaskName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/task_name_field"
+            android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/fieldTaskEnd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fieldTaskDescription"
-        android:ems="10"
-        android:inputType="datetime"
-        android:hint="@string/deadline_field"
-        android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/fieldTaskDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top"
+            android:layout_below="@id/fieldTaskName"
+            android:inputType="textMultiLine"
+            android:hint="@string/description_field"
+            android:importantForAutofill="no" />
 
-    <CheckBox
-        android:id="@+id/fieldIsTaskImportant"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fieldTaskEnd"
-        android:text="@string/important_checkbox" />
+        <EditText
+            android:id="@+id/fieldTaskEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldTaskDescription"
+            android:ems="10"
+            android:inputType="datetime"
+            android:hint="@string/deadline_field"
+            android:importantForAutofill="no" />
 
-    <CheckBox
-        android:id="@+id/fieldIsTaskFinished"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fieldIsTaskImportant"
-        android:text="@string/is_finished_checkbox" />
+        <CheckBox
+            android:id="@+id/fieldIsTaskImportant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldTaskEnd"
+            android:text="@string/important_checkbox" />
 
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fieldIsTaskFinished"
-        android:text="@string/edit_button" />
+        <CheckBox
+            android:id="@+id/fieldIsTaskFinished"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldIsTaskImportant"
+            android:text="@string/is_finished_checkbox" />
 
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonEdit"
-        android:backgroundTint="@color/colorRed"
-        android:textColor="@color/colorWhite"
-        android:text="@string/delete_button" />
+        <Button
+            android:id="@+id/buttonEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fieldIsTaskFinished"
+            android:text="@string/edit_button" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonEdit"
+            android:backgroundTint="@color/colorRed"
+            android:textColor="@color/colorWhite"
+            android:text="@string/delete_button" />
+
+    </RelativeLayout>
+</ScrollView>
