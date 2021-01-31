@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class ActivityHelper {
     private ActivityHelper() {
-        // hide the default ctor
+        // hides the default ctor
     }
 
     public static void changeActivity(AppCompatActivity origin, Class<? extends Activity> dest) {

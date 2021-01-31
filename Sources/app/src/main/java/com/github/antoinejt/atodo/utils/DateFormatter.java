@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class DateFormatter {
     private DateFormatter() {
-        // hides default ctor
+        // hides the default ctor
     }
 
     private static final String DATE_PATTERN = "dd/MM/yyyy";
