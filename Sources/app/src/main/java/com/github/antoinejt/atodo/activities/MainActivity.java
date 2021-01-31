@@ -7,9 +7,12 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.github.antoinejt.atodo.R;
 import com.github.antoinejt.atodo.utils.Goto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Locale;
 
 // Sonarlint java:S110 - Inheritance tree of classes should not be too deep
 //   I can't do anything about it, that's how Android apps are built.
@@ -17,17 +20,24 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //   I want to store a reference to the latest instance, more or less
 //   like in a singleton pattern, so I must write to a static field.
 @SuppressWarnings({"java:S110", "java:S2696"})
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LocalizationActivity {
     private static MainActivity instance;
+    private static boolean hasSetLanguage = false;
 
     public static MainActivity getInstance() {
         return instance;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
+
+        // set last selected language only at startup
+        if (!hasSetLanguage) {
+            setLanguage(Locale.getDefault());
+            hasSetLanguage = true;
+        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
