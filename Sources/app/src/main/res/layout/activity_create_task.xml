@@ -33,9 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/fieldTaskDescription"
             android:ems="10"
-            android:inputType="datetime"
+            android:inputType="date"
             android:hint="@string/deadline_field"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:clickable="true"
+            android:focusable="false"
+            android:cursorVisible="false"/>
 
         <Button
             android:id="@+id/buttonCreate"
