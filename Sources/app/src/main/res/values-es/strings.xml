@@ -7,8 +7,7 @@
 
     <!-- Layout strings -->
     <string name="action_settings">Opciones</string>
-    <!-- TODO Translate -->
-    <string name="hide_switch">Hide finished tasks</string>
+    <string name="hide_switch">Esconder tareas acabadas</string>
     <string name="task_list_fragment">Lista de Tareas</string>
     <string name="deadline_field">Plazo (DD/MM/YYYY)</string>
     <string name="description_field">Descripción</string>
